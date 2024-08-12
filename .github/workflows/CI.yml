@@ -99,12 +99,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
         with:
-          start: npm exec vite --host 127.0.0.1
+          start: PORT=${{ env.PORT }} npx vite --host 127.0.0.1
           build: npm run build
           wait-on: https://127.0.0.1:${{ env.PORT }}
           wait-on-timeout: 20
           browser: chrome
-          env: PORT=3002
 
       - name: Run Component tests
         uses: cypress-io/github-action@v6
