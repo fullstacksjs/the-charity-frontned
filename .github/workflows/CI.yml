@@ -57,6 +57,7 @@ jobs:
           # NOTE: required because https://www.chromatic.com/docs/github-actions#support-for-codeactionscheckoutv2code-and-above
           fetch-depth: 0
 
+
       - uses: actions/setup-node@v3
         with:
           node-version-file: 'package.json'
@@ -89,6 +90,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: 'package.json'
+          cache: 'npm'
 
       - name: Run E2E tests
         uses: cypress-io/github-action@v4
