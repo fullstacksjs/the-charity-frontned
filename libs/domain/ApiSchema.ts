@@ -18,6 +18,7 @@ export type Scalars = {
   date: { input: string; output: string; }
   money: { input: any; output: any; }
   timestamptz: { input: string; output: string; }
+  timetz: { input: any; output: any; }
   uuid: { input: string; output: string; }
 };
 
@@ -870,11 +871,9 @@ export type ApiDisabilityStatusUpdates = {
 /** columns and relationships of "document" */
 export type ApiDocument = {
   __typename?: 'document';
-  householder_id?: Maybe<Scalars['uuid']['output']>;
   id: Scalars['uuid']['output'];
   storage_id: Scalars['String']['output'];
   url: Scalars['String']['output'];
-  visit_id?: Maybe<Scalars['uuid']['output']>;
 };
 
 /** aggregated selection of "document" */
@@ -929,11 +928,9 @@ export type ApiDocumentBoolExp = {
   _and?: InputMaybe<Array<ApiDocumentBoolExp>>;
   _not?: InputMaybe<ApiDocumentBoolExp>;
   _or?: InputMaybe<Array<ApiDocumentBoolExp>>;
-  householder_id?: InputMaybe<ApiUuidComparisonExp>;
   id?: InputMaybe<ApiUuidComparisonExp>;
   storage_id?: InputMaybe<ApiStringComparisonExp>;
   url?: InputMaybe<ApiStringComparisonExp>;
-  visit_id?: InputMaybe<ApiUuidComparisonExp>;
 };
 
 /** unique or primary key constraints on table "document" */
@@ -946,49 +943,39 @@ export enum ApiDocumentConstraint {
 
 /** input type for inserting data into table "document" */
 export type ApiDocumentInsertInput = {
-  householder_id?: InputMaybe<Scalars['uuid']['input']>;
   id?: InputMaybe<Scalars['uuid']['input']>;
   storage_id?: InputMaybe<Scalars['String']['input']>;
   url?: InputMaybe<Scalars['String']['input']>;
-  visit_id?: InputMaybe<Scalars['uuid']['input']>;
 };
 
 /** aggregate max on columns */
 export type ApiDocumentMaxFields = {
   __typename?: 'document_max_fields';
-  householder_id?: Maybe<Scalars['uuid']['output']>;
   id?: Maybe<Scalars['uuid']['output']>;
   storage_id?: Maybe<Scalars['String']['output']>;
   url?: Maybe<Scalars['String']['output']>;
-  visit_id?: Maybe<Scalars['uuid']['output']>;
 };
 
 /** order by max() on columns of table "document" */
 export type ApiDocumentMaxOrderBy = {
-  householder_id?: InputMaybe<ApiOrderBy>;
   id?: InputMaybe<ApiOrderBy>;
   storage_id?: InputMaybe<ApiOrderBy>;
   url?: InputMaybe<ApiOrderBy>;
-  visit_id?: InputMaybe<ApiOrderBy>;
 };
 
 /** aggregate min on columns */
 export type ApiDocumentMinFields = {
   __typename?: 'document_min_fields';
-  householder_id?: Maybe<Scalars['uuid']['output']>;
   id?: Maybe<Scalars['uuid']['output']>;
   storage_id?: Maybe<Scalars['String']['output']>;
   url?: Maybe<Scalars['String']['output']>;
-  visit_id?: Maybe<Scalars['uuid']['output']>;
 };
 
 /** order by min() on columns of table "document" */
 export type ApiDocumentMinOrderBy = {
-  householder_id?: InputMaybe<ApiOrderBy>;
   id?: InputMaybe<ApiOrderBy>;
   storage_id?: InputMaybe<ApiOrderBy>;
   url?: InputMaybe<ApiOrderBy>;
-  visit_id?: InputMaybe<ApiOrderBy>;
 };
 
 /** response of any mutation on the table "document" */
@@ -1000,6 +987,13 @@ export type ApiDocumentMutationResponse = {
   returning: Array<ApiDocument>;
 };
 
+/** input type for inserting object relation for remote table "document" */
+export type ApiDocumentObjRelInsertInput = {
+  data: ApiDocumentInsertInput;
+  /** upsert condition */
+  on_conflict?: InputMaybe<ApiDocumentOnConflict>;
+};
+
 /** on_conflict condition type for table "document" */
 export type ApiDocumentOnConflict = {
   constraint: ApiDocumentConstraint;
@@ -1009,11 +1003,9 @@ export type ApiDocumentOnConflict = {
 
 /** Ordering options when selecting data from "document". */
 export type ApiDocumentOrderBy = {
-  householder_id?: InputMaybe<ApiOrderBy>;
   id?: InputMaybe<ApiOrderBy>;
   storage_id?: InputMaybe<ApiOrderBy>;
   url?: InputMaybe<ApiOrderBy>;
-  visit_id?: InputMaybe<ApiOrderBy>;
 };
 
 /** primary key columns input for table: document */
@@ -1024,24 +1016,18 @@ export type ApiDocumentPkColumnsInput = {
 /** select columns of table "document" */
 export enum ApiDocumentSelectColumn {
   /** column name */
-  HouseholderId = 'householder_id',
-  /** column name */
   Id = 'id',
   /** column name */
   StorageId = 'storage_id',
   /** column name */
-  Url = 'url',
-  /** column name */
-  VisitId = 'visit_id'
+  Url = 'url'
 }
 
 /** input type for updating data in table "document" */
 export type ApiDocumentSetInput = {
-  householder_id?: InputMaybe<Scalars['uuid']['input']>;
   id?: InputMaybe<Scalars['uuid']['input']>;
   storage_id?: InputMaybe<Scalars['String']['input']>;
   url?: InputMaybe<Scalars['String']['input']>;
-  visit_id?: InputMaybe<Scalars['uuid']['input']>;
 };
 
 /** Streaming cursor of the table "document" */
@@ -1054,25 +1040,19 @@ export type ApiDocumentStreamCursorInput = {
 
 /** Initial value of the column from where the streaming should start */
 export type ApiDocumentStreamCursorValueInput = {
-  householder_id?: InputMaybe<Scalars['uuid']['input']>;
   id?: InputMaybe<Scalars['uuid']['input']>;
   storage_id?: InputMaybe<Scalars['String']['input']>;
   url?: InputMaybe<Scalars['String']['input']>;
-  visit_id?: InputMaybe<Scalars['uuid']['input']>;
 };
 
 /** update columns of table "document" */
 export enum ApiDocumentUpdateColumn {
   /** column name */
-  HouseholderId = 'householder_id',
-  /** column name */
   Id = 'id',
   /** column name */
   StorageId = 'storage_id',
   /** column name */
-  Url = 'url',
-  /** column name */
-  VisitId = 'visit_id'
+  Url = 'url'
 }
 
 export type ApiDocumentUpdates = {
@@ -1369,6 +1349,30 @@ export type ApiHousehold = {
   severity: HouseholdSeverityEnum;
   status: HouseholdStatusEnum;
   updated_at: Scalars['timestamptz']['output'];
+  /** An array relationship */
+  visits: Array<ApiVisit>;
+  /** An aggregate relationship */
+  visits_aggregate: ApiVisitAggregate;
+};
+
+
+/** columns and relationships of "household" */
+export type ApiHouseholdApiVisitsArgs = {
+  distinct_on?: InputMaybe<Array<ApiVisitSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<ApiVisitOrderBy>>;
+  where?: InputMaybe<ApiVisitBoolExp>;
+};
+
+
+/** columns and relationships of "household" */
+export type ApiHouseholdApiVisitsAggregateArgs = {
+  distinct_on?: InputMaybe<Array<ApiVisitSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<ApiVisitOrderBy>>;
+  where?: InputMaybe<ApiVisitBoolExp>;
 };
 
 /** aggregated selection of "household" */
@@ -1423,6 +1427,8 @@ export type ApiHouseholdBoolExp = {
   severity?: InputMaybe<HouseholdSeverityEnumComparisonExp>;
   status?: InputMaybe<HouseholdStatusEnumComparisonExp>;
   updated_at?: InputMaybe<ApiTimestamptzComparisonExp>;
+  visits?: InputMaybe<ApiVisitBoolExp>;
+  visits_aggregate?: InputMaybe<ApiVisitAggregateBoolExp>;
 };
 
 /** unique or primary key constraints on table "household" */
@@ -1447,6 +1453,7 @@ export type ApiHouseholdInsertInput = {
   severity?: InputMaybe<HouseholdSeverityEnum>;
   status?: InputMaybe<HouseholdStatusEnum>;
   updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  visits?: InputMaybe<ApiVisitArrRelInsertInput>;
 };
 
 /** aggregate max on columns */
@@ -1511,6 +1518,7 @@ export type ApiHouseholdOrderBy = {
   severity?: InputMaybe<ApiOrderBy>;
   status?: InputMaybe<ApiOrderBy>;
   updated_at?: InputMaybe<ApiOrderBy>;
+  visits_aggregate?: InputMaybe<ApiVisitAggregateOrderBy>;
 };
 
 /** primary key columns input for table: household */
@@ -2307,10 +2315,6 @@ export type ApiHouseholder = {
   gender?: Maybe<GenderEnum>;
   health_comment?: Maybe<Scalars['String']['output']>;
   health_description?: Maybe<Scalars['String']['output']>;
-  /** An array relationship */
-  health_documents: Array<ApiDocument>;
-  /** An aggregate relationship */
-  health_documents_aggregate: ApiDocumentAggregate;
   health_status?: Maybe<HealthStatusEnum>;
   household_id: Scalars['uuid']['output'];
   id: Scalars['uuid']['output'];
@@ -2368,26 +2372,6 @@ export type ApiHouseholderApiDisabilityDocumentsArgs = {
 
 /** columns and relationships of "householder" */
 export type ApiHouseholderApiDisabilityDocumentsAggregateArgs = {
-  distinct_on?: InputMaybe<Array<ApiDocumentSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<ApiDocumentOrderBy>>;
-  where?: InputMaybe<ApiDocumentBoolExp>;
-};
-
-
-/** columns and relationships of "householder" */
-export type ApiHouseholderApiHealthDocumentsArgs = {
-  distinct_on?: InputMaybe<Array<ApiDocumentSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<ApiDocumentOrderBy>>;
-  where?: InputMaybe<ApiDocumentBoolExp>;
-};
-
-
-/** columns and relationships of "householder" */
-export type ApiHouseholderApiHealthDocumentsAggregateArgs = {
   distinct_on?: InputMaybe<Array<ApiDocumentSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
@@ -2458,8 +2442,6 @@ export type ApiHouseholderBoolExp = {
   gender?: InputMaybe<GenderEnumComparisonExp>;
   health_comment?: InputMaybe<ApiStringComparisonExp>;
   health_description?: InputMaybe<ApiStringComparisonExp>;
-  health_documents?: InputMaybe<ApiDocumentBoolExp>;
-  health_documents_aggregate?: InputMaybe<ApiDocumentAggregateBoolExp>;
   health_status?: InputMaybe<HealthStatusEnumComparisonExp>;
   household_id?: InputMaybe<ApiUuidComparisonExp>;
   id?: InputMaybe<ApiUuidComparisonExp>;
@@ -2520,7 +2502,6 @@ export type ApiHouseholderInsertInput = {
   gender?: InputMaybe<GenderEnum>;
   health_comment?: InputMaybe<Scalars['String']['input']>;
   health_description?: InputMaybe<Scalars['String']['input']>;
-  health_documents?: InputMaybe<ApiDocumentArrRelInsertInput>;
   health_status?: InputMaybe<HealthStatusEnum>;
   household_id?: InputMaybe<Scalars['uuid']['input']>;
   id?: InputMaybe<Scalars['uuid']['input']>;
@@ -2645,7 +2626,6 @@ export type ApiHouseholderOrderBy = {
   gender?: InputMaybe<ApiOrderBy>;
   health_comment?: InputMaybe<ApiOrderBy>;
   health_description?: InputMaybe<ApiOrderBy>;
-  health_documents_aggregate?: InputMaybe<ApiDocumentAggregateOrderBy>;
   health_status?: InputMaybe<ApiOrderBy>;
   household_id?: InputMaybe<ApiOrderBy>;
   id?: InputMaybe<ApiOrderBy>;
@@ -3590,6 +3570,10 @@ export type ApiMutationRoot = {
   delete_project?: Maybe<ApiProjectMutationResponse>;
   /** delete single row from the table: "project" */
   delete_project_by_pk?: Maybe<ApiProject>;
+  /** delete data from the table: "project_document" */
+  delete_project_document?: Maybe<ApiProjectDocumentMutationResponse>;
+  /** delete single row from the table: "project_document" */
+  delete_project_document_by_pk?: Maybe<ApiProjectDocument>;
   /** delete data from the table: "project_status" */
   delete_project_status?: Maybe<ApiProjectStatusMutationResponse>;
   /** delete single row from the table: "project_status" */
@@ -3614,6 +3598,10 @@ export type ApiMutationRoot = {
   delete_visit?: Maybe<ApiVisitMutationResponse>;
   /** delete single row from the table: "visit" */
   delete_visit_by_pk?: Maybe<ApiVisit>;
+  /** delete data from the table: "visit_document" */
+  delete_visit_document?: Maybe<ApiVisitDocumentMutationResponse>;
+  /** delete single row from the table: "visit_document" */
+  delete_visit_document_by_pk?: Maybe<ApiVisitDocument>;
   /** delete data from the table: "visit_status" */
   delete_visit_status?: Maybe<ApiVisitStatusMutationResponse>;
   /** delete single row from the table: "visit_status" */
@@ -3692,6 +3680,10 @@ export type ApiMutationRoot = {
   insert_neighborhood_one?: Maybe<ApiNeighborhood>;
   /** insert data into the table: "project" */
   insert_project?: Maybe<ApiProjectMutationResponse>;
+  /** insert data into the table: "project_document" */
+  insert_project_document?: Maybe<ApiProjectDocumentMutationResponse>;
+  /** insert a single row into the table: "project_document" */
+  insert_project_document_one?: Maybe<ApiProjectDocument>;
   /** insert a single row into the table: "project" */
   insert_project_one?: Maybe<ApiProject>;
   /** insert data into the table: "project_status" */
@@ -3716,6 +3708,10 @@ export type ApiMutationRoot = {
   insert_subsidy_one?: Maybe<ApiSubsidy>;
   /** insert data into the table: "visit" */
   insert_visit?: Maybe<ApiVisitMutationResponse>;
+  /** insert data into the table: "visit_document" */
+  insert_visit_document?: Maybe<ApiVisitDocumentMutationResponse>;
+  /** insert a single row into the table: "visit_document" */
+  insert_visit_document_one?: Maybe<ApiVisitDocument>;
   /** insert a single row into the table: "visit" */
   insert_visit_one?: Maybe<ApiVisit>;
   /** insert data into the table: "visit_status" */
@@ -3834,6 +3830,12 @@ export type ApiMutationRoot = {
   update_project?: Maybe<ApiProjectMutationResponse>;
   /** update single row of the table: "project" */
   update_project_by_pk?: Maybe<ApiProject>;
+  /** update data of the table: "project_document" */
+  update_project_document?: Maybe<ApiProjectDocumentMutationResponse>;
+  /** update single row of the table: "project_document" */
+  update_project_document_by_pk?: Maybe<ApiProjectDocument>;
+  /** update multiples rows of table: "project_document" */
+  update_project_document_many?: Maybe<Array<Maybe<ApiProjectDocumentMutationResponse>>>;
   /** update multiples rows of table: "project" */
   update_project_many?: Maybe<Array<Maybe<ApiProjectMutationResponse>>>;
   /** update data of the table: "project_status" */
@@ -3870,6 +3872,12 @@ export type ApiMutationRoot = {
   update_visit?: Maybe<ApiVisitMutationResponse>;
   /** update single row of the table: "visit" */
   update_visit_by_pk?: Maybe<ApiVisit>;
+  /** update data of the table: "visit_document" */
+  update_visit_document?: Maybe<ApiVisitDocumentMutationResponse>;
+  /** update single row of the table: "visit_document" */
+  update_visit_document_by_pk?: Maybe<ApiVisitDocument>;
+  /** update multiples rows of table: "visit_document" */
+  update_visit_document_many?: Maybe<Array<Maybe<ApiVisitDocumentMutationResponse>>>;
   /** update multiples rows of table: "visit" */
   update_visit_many?: Maybe<Array<Maybe<ApiVisitMutationResponse>>>;
   /** update data of the table: "visit_status" */
@@ -4111,6 +4119,18 @@ export type ApiMutationRootApiDeleteProjectByPkArgs = {
 
 
 /** mutation root */
+export type ApiMutationRootApiDeleteProjectDocumentArgs = {
+  where: ApiProjectDocumentBoolExp;
+};
+
+
+/** mutation root */
+export type ApiMutationRootApiDeleteProjectDocumentByPkArgs = {
+  id: Scalars['uuid']['input'];
+};
+
+
+/** mutation root */
 export type ApiMutationRootApiDeleteProjectStatusArgs = {
   where: ApiProjectStatusBoolExp;
 };
@@ -4178,6 +4198,18 @@ export type ApiMutationRootApiDeleteVisitArgs = {
 
 /** mutation root */
 export type ApiMutationRootApiDeleteVisitByPkArgs = {
+  id: Scalars['uuid']['input'];
+};
+
+
+/** mutation root */
+export type ApiMutationRootApiDeleteVisitDocumentArgs = {
+  where: ApiVisitDocumentBoolExp;
+};
+
+
+/** mutation root */
+export type ApiMutationRootApiDeleteVisitDocumentByPkArgs = {
   id: Scalars['uuid']['input'];
 };
 
@@ -4454,6 +4486,20 @@ export type ApiMutationRootApiInsertProjectArgs = {
 
 
 /** mutation root */
+export type ApiMutationRootApiInsertProjectDocumentArgs = {
+  objects: Array<ApiProjectDocumentInsertInput>;
+  on_conflict?: InputMaybe<ApiProjectDocumentOnConflict>;
+};
+
+
+/** mutation root */
+export type ApiMutationRootApiInsertProjectDocumentOneArgs = {
+  object: ApiProjectDocumentInsertInput;
+  on_conflict?: InputMaybe<ApiProjectDocumentOnConflict>;
+};
+
+
+/** mutation root */
 export type ApiMutationRootApiInsertProjectOneArgs = {
   object: ApiProjectInsertInput;
   on_conflict?: InputMaybe<ApiProjectOnConflict>;
@@ -4534,6 +4580,20 @@ export type ApiMutationRootApiInsertSubsidyOneArgs = {
 export type ApiMutationRootApiInsertVisitArgs = {
   objects: Array<ApiVisitInsertInput>;
   on_conflict?: InputMaybe<ApiVisitOnConflict>;
+};
+
+
+/** mutation root */
+export type ApiMutationRootApiInsertVisitDocumentArgs = {
+  objects: Array<ApiVisitDocumentInsertInput>;
+  on_conflict?: InputMaybe<ApiVisitDocumentOnConflict>;
+};
+
+
+/** mutation root */
+export type ApiMutationRootApiInsertVisitDocumentOneArgs = {
+  object: ApiVisitDocumentInsertInput;
+  on_conflict?: InputMaybe<ApiVisitDocumentOnConflict>;
 };
 
 
@@ -4939,6 +4999,26 @@ export type ApiMutationRootApiUpdateProjectByPkArgs = {
 
 
 /** mutation root */
+export type ApiMutationRootApiUpdateProjectDocumentArgs = {
+  _set?: InputMaybe<ApiProjectDocumentSetInput>;
+  where: ApiProjectDocumentBoolExp;
+};
+
+
+/** mutation root */
+export type ApiMutationRootApiUpdateProjectDocumentByPkArgs = {
+  _set?: InputMaybe<ApiProjectDocumentSetInput>;
+  pk_columns: ApiProjectDocumentPkColumnsInput;
+};
+
+
+/** mutation root */
+export type ApiMutationRootApiUpdateProjectDocumentManyArgs = {
+  updates: Array<ApiProjectDocumentUpdates>;
+};
+
+
+/** mutation root */
 export type ApiMutationRootApiUpdateProjectManyArgs = {
   updates: Array<ApiProjectUpdates>;
 };
@@ -5055,6 +5135,26 @@ export type ApiMutationRootApiUpdateVisitArgs = {
 export type ApiMutationRootApiUpdateVisitByPkArgs = {
   _set?: InputMaybe<ApiVisitSetInput>;
   pk_columns: ApiVisitPkColumnsInput;
+};
+
+
+/** mutation root */
+export type ApiMutationRootApiUpdateVisitDocumentArgs = {
+  _set?: InputMaybe<ApiVisitDocumentSetInput>;
+  where: ApiVisitDocumentBoolExp;
+};
+
+
+/** mutation root */
+export type ApiMutationRootApiUpdateVisitDocumentByPkArgs = {
+  _set?: InputMaybe<ApiVisitDocumentSetInput>;
+  pk_columns: ApiVisitDocumentPkColumnsInput;
+};
+
+
+/** mutation root */
+export type ApiMutationRootApiUpdateVisitDocumentManyArgs = {
+  updates: Array<ApiVisitDocumentUpdates>;
 };
 
 
@@ -5450,6 +5550,169 @@ export enum ApiProjectConstraint {
   /** unique or primary key constraint on columns "id" */
   ProjectPkey = 'project_pkey'
 }
+
+/** columns and relationships of "project_document" */
+export type ApiProjectDocument = {
+  __typename?: 'project_document';
+  date: Scalars['timetz']['output'];
+  description: Scalars['String']['output'];
+  /** An object relationship */
+  document?: Maybe<ApiDocument>;
+  document_id: Scalars['uuid']['output'];
+  id: Scalars['uuid']['output'];
+};
+
+/** aggregated selection of "project_document" */
+export type ApiProjectDocumentAggregate = {
+  __typename?: 'project_document_aggregate';
+  aggregate?: Maybe<ApiProjectDocumentAggregateFields>;
+  nodes: Array<ApiProjectDocument>;
+};
+
+/** aggregate fields of "project_document" */
+export type ApiProjectDocumentAggregateFields = {
+  __typename?: 'project_document_aggregate_fields';
+  count: Scalars['Int']['output'];
+  max?: Maybe<ApiProjectDocumentMaxFields>;
+  min?: Maybe<ApiProjectDocumentMinFields>;
+};
+
+
+/** aggregate fields of "project_document" */
+export type ApiProjectDocumentAggregateFieldsApiCountArgs = {
+  columns?: InputMaybe<Array<ApiProjectDocumentSelectColumn>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** Boolean expression to filter rows from the table "project_document". All fields are combined with a logical 'AND'. */
+export type ApiProjectDocumentBoolExp = {
+  _and?: InputMaybe<Array<ApiProjectDocumentBoolExp>>;
+  _not?: InputMaybe<ApiProjectDocumentBoolExp>;
+  _or?: InputMaybe<Array<ApiProjectDocumentBoolExp>>;
+  date?: InputMaybe<ApiTimetzComparisonExp>;
+  description?: InputMaybe<ApiStringComparisonExp>;
+  document?: InputMaybe<ApiDocumentBoolExp>;
+  document_id?: InputMaybe<ApiUuidComparisonExp>;
+  id?: InputMaybe<ApiUuidComparisonExp>;
+};
+
+/** unique or primary key constraints on table "project_document" */
+export enum ApiProjectDocumentConstraint {
+  /** unique or primary key constraint on columns "id" */
+  ProjectDocumentPkey = 'project_document_pkey'
+}
+
+/** input type for inserting data into table "project_document" */
+export type ApiProjectDocumentInsertInput = {
+  date?: InputMaybe<Scalars['timetz']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  document?: InputMaybe<ApiDocumentObjRelInsertInput>;
+  document_id?: InputMaybe<Scalars['uuid']['input']>;
+  id?: InputMaybe<Scalars['uuid']['input']>;
+};
+
+/** aggregate max on columns */
+export type ApiProjectDocumentMaxFields = {
+  __typename?: 'project_document_max_fields';
+  date?: Maybe<Scalars['timetz']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  document_id?: Maybe<Scalars['uuid']['output']>;
+  id?: Maybe<Scalars['uuid']['output']>;
+};
+
+/** aggregate min on columns */
+export type ApiProjectDocumentMinFields = {
+  __typename?: 'project_document_min_fields';
+  date?: Maybe<Scalars['timetz']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  document_id?: Maybe<Scalars['uuid']['output']>;
+  id?: Maybe<Scalars['uuid']['output']>;
+};
+
+/** response of any mutation on the table "project_document" */
+export type ApiProjectDocumentMutationResponse = {
+  __typename?: 'project_document_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']['output'];
+  /** data from the rows affected by the mutation */
+  returning: Array<ApiProjectDocument>;
+};
+
+/** on_conflict condition type for table "project_document" */
+export type ApiProjectDocumentOnConflict = {
+  constraint: ApiProjectDocumentConstraint;
+  update_columns?: Array<ApiProjectDocumentUpdateColumn>;
+  where?: InputMaybe<ApiProjectDocumentBoolExp>;
+};
+
+/** Ordering options when selecting data from "project_document". */
+export type ApiProjectDocumentOrderBy = {
+  date?: InputMaybe<ApiOrderBy>;
+  description?: InputMaybe<ApiOrderBy>;
+  document?: InputMaybe<ApiDocumentOrderBy>;
+  document_id?: InputMaybe<ApiOrderBy>;
+  id?: InputMaybe<ApiOrderBy>;
+};
+
+/** primary key columns input for table: project_document */
+export type ApiProjectDocumentPkColumnsInput = {
+  id: Scalars['uuid']['input'];
+};
+
+/** select columns of table "project_document" */
+export enum ApiProjectDocumentSelectColumn {
+  /** column name */
+  Date = 'date',
+  /** column name */
+  Description = 'description',
+  /** column name */
+  DocumentId = 'document_id',
+  /** column name */
+  Id = 'id'
+}
+
+/** input type for updating data in table "project_document" */
+export type ApiProjectDocumentSetInput = {
+  date?: InputMaybe<Scalars['timetz']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  document_id?: InputMaybe<Scalars['uuid']['input']>;
+  id?: InputMaybe<Scalars['uuid']['input']>;
+};
+
+/** Streaming cursor of the table "project_document" */
+export type ApiProjectDocumentStreamCursorInput = {
+  /** Stream column input with initial value */
+  initial_value: ApiProjectDocumentStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<ApiCursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type ApiProjectDocumentStreamCursorValueInput = {
+  date?: InputMaybe<Scalars['timetz']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  document_id?: InputMaybe<Scalars['uuid']['input']>;
+  id?: InputMaybe<Scalars['uuid']['input']>;
+};
+
+/** update columns of table "project_document" */
+export enum ApiProjectDocumentUpdateColumn {
+  /** column name */
+  Date = 'date',
+  /** column name */
+  Description = 'description',
+  /** column name */
+  DocumentId = 'document_id',
+  /** column name */
+  Id = 'id'
+}
+
+export type ApiProjectDocumentUpdates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<ApiProjectDocumentSetInput>;
+  /** filter the rows which have to be updated */
+  where: ApiProjectDocumentBoolExp;
+};
 
 /** input type for inserting data into table "project" */
 export type ApiProjectInsertInput = {
@@ -6012,6 +6275,12 @@ export type ApiQueryRoot = {
   project_aggregate: ApiProjectAggregate;
   /** fetch data from the table: "project" using primary key columns */
   project_by_pk?: Maybe<ApiProject>;
+  /** fetch data from the table: "project_document" */
+  project_document: Array<ApiProjectDocument>;
+  /** fetch aggregated fields from the table: "project_document" */
+  project_document_aggregate: ApiProjectDocumentAggregate;
+  /** fetch data from the table: "project_document" using primary key columns */
+  project_document_by_pk?: Maybe<ApiProjectDocument>;
   /** fetch data from the table: "project_status" */
   project_status: Array<ApiProjectStatus>;
   /** fetch aggregated fields from the table: "project_status" */
@@ -6048,6 +6317,12 @@ export type ApiQueryRoot = {
   visit_aggregate: ApiVisitAggregate;
   /** fetch data from the table: "visit" using primary key columns */
   visit_by_pk?: Maybe<ApiVisit>;
+  /** fetch data from the table: "visit_document" */
+  visit_document: Array<ApiVisitDocument>;
+  /** fetch aggregated fields from the table: "visit_document" */
+  visit_document_aggregate: ApiVisitDocumentAggregate;
+  /** fetch data from the table: "visit_document" using primary key columns */
+  visit_document_by_pk?: Maybe<ApiVisitDocument>;
   /** fetch data from the table: "visit_status" */
   visit_status: Array<ApiVisitStatus>;
   /** fetch aggregated fields from the table: "visit_status" */
@@ -6495,6 +6770,29 @@ export type ApiQueryRootApiProjectByPkArgs = {
 };
 
 
+export type ApiQueryRootApiProjectDocumentArgs = {
+  distinct_on?: InputMaybe<Array<ApiProjectDocumentSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<ApiProjectDocumentOrderBy>>;
+  where?: InputMaybe<ApiProjectDocumentBoolExp>;
+};
+
+
+export type ApiQueryRootApiProjectDocumentAggregateArgs = {
+  distinct_on?: InputMaybe<Array<ApiProjectDocumentSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<ApiProjectDocumentOrderBy>>;
+  where?: InputMaybe<ApiProjectDocumentBoolExp>;
+};
+
+
+export type ApiQueryRootApiProjectDocumentByPkArgs = {
+  id: Scalars['uuid']['input'];
+};
+
+
 export type ApiQueryRootApiProjectStatusArgs = {
   distinct_on?: InputMaybe<Array<ApiProjectStatusSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -6629,6 +6927,29 @@ export type ApiQueryRootApiVisitAggregateArgs = {
 
 
 export type ApiQueryRootApiVisitByPkArgs = {
+  id: Scalars['uuid']['input'];
+};
+
+
+export type ApiQueryRootApiVisitDocumentArgs = {
+  distinct_on?: InputMaybe<Array<ApiVisitDocumentSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<ApiVisitDocumentOrderBy>>;
+  where?: InputMaybe<ApiVisitDocumentBoolExp>;
+};
+
+
+export type ApiQueryRootApiVisitDocumentAggregateArgs = {
+  distinct_on?: InputMaybe<Array<ApiVisitDocumentSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<ApiVisitDocumentOrderBy>>;
+  where?: InputMaybe<ApiVisitDocumentBoolExp>;
+};
+
+
+export type ApiQueryRootApiVisitDocumentByPkArgs = {
   id: Scalars['uuid']['input'];
 };
 
@@ -7091,6 +7412,14 @@ export type ApiSubscriptionRoot = {
   project_aggregate: ApiProjectAggregate;
   /** fetch data from the table: "project" using primary key columns */
   project_by_pk?: Maybe<ApiProject>;
+  /** fetch data from the table: "project_document" */
+  project_document: Array<ApiProjectDocument>;
+  /** fetch aggregated fields from the table: "project_document" */
+  project_document_aggregate: ApiProjectDocumentAggregate;
+  /** fetch data from the table: "project_document" using primary key columns */
+  project_document_by_pk?: Maybe<ApiProjectDocument>;
+  /** fetch data from the table in a streaming manner: "project_document" */
+  project_document_stream: Array<ApiProjectDocument>;
   /** fetch data from the table: "project_status" */
   project_status: Array<ApiProjectStatus>;
   /** fetch aggregated fields from the table: "project_status" */
@@ -7139,6 +7468,14 @@ export type ApiSubscriptionRoot = {
   visit_aggregate: ApiVisitAggregate;
   /** fetch data from the table: "visit" using primary key columns */
   visit_by_pk?: Maybe<ApiVisit>;
+  /** fetch data from the table: "visit_document" */
+  visit_document: Array<ApiVisitDocument>;
+  /** fetch aggregated fields from the table: "visit_document" */
+  visit_document_aggregate: ApiVisitDocumentAggregate;
+  /** fetch data from the table: "visit_document" using primary key columns */
+  visit_document_by_pk?: Maybe<ApiVisitDocument>;
+  /** fetch data from the table in a streaming manner: "visit_document" */
+  visit_document_stream: Array<ApiVisitDocument>;
   /** fetch data from the table: "visit_status" */
   visit_status: Array<ApiVisitStatus>;
   /** fetch aggregated fields from the table: "visit_status" */
@@ -7716,6 +8053,36 @@ export type ApiSubscriptionRootApiProjectByPkArgs = {
 };
 
 
+export type ApiSubscriptionRootApiProjectDocumentArgs = {
+  distinct_on?: InputMaybe<Array<ApiProjectDocumentSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<ApiProjectDocumentOrderBy>>;
+  where?: InputMaybe<ApiProjectDocumentBoolExp>;
+};
+
+
+export type ApiSubscriptionRootApiProjectDocumentAggregateArgs = {
+  distinct_on?: InputMaybe<Array<ApiProjectDocumentSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<ApiProjectDocumentOrderBy>>;
+  where?: InputMaybe<ApiProjectDocumentBoolExp>;
+};
+
+
+export type ApiSubscriptionRootApiProjectDocumentByPkArgs = {
+  id: Scalars['uuid']['input'];
+};
+
+
+export type ApiSubscriptionRootApiProjectDocumentStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<ApiProjectDocumentStreamCursorInput>>;
+  where?: InputMaybe<ApiProjectDocumentBoolExp>;
+};
+
+
 export type ApiSubscriptionRootApiProjectStatusArgs = {
   distinct_on?: InputMaybe<Array<ApiProjectStatusSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -7893,6 +8260,36 @@ export type ApiSubscriptionRootApiVisitAggregateArgs = {
 
 export type ApiSubscriptionRootApiVisitByPkArgs = {
   id: Scalars['uuid']['input'];
+};
+
+
+export type ApiSubscriptionRootApiVisitDocumentArgs = {
+  distinct_on?: InputMaybe<Array<ApiVisitDocumentSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<ApiVisitDocumentOrderBy>>;
+  where?: InputMaybe<ApiVisitDocumentBoolExp>;
+};
+
+
+export type ApiSubscriptionRootApiVisitDocumentAggregateArgs = {
+  distinct_on?: InputMaybe<Array<ApiVisitDocumentSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<ApiVisitDocumentOrderBy>>;
+  where?: InputMaybe<ApiVisitDocumentBoolExp>;
+};
+
+
+export type ApiSubscriptionRootApiVisitDocumentByPkArgs = {
+  id: Scalars['uuid']['input'];
+};
+
+
+export type ApiSubscriptionRootApiVisitDocumentStreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<ApiVisitDocumentStreamCursorInput>>;
+  where?: InputMaybe<ApiVisitDocumentBoolExp>;
 };
 
 
@@ -8093,6 +8490,19 @@ export type ApiTimestamptzComparisonExp = {
   _nin?: InputMaybe<Array<Scalars['timestamptz']['input']>>;
 };
 
+/** Boolean expression to compare columns of type "timetz". All fields are combined with logical 'AND'. */
+export type ApiTimetzComparisonExp = {
+  _eq?: InputMaybe<Scalars['timetz']['input']>;
+  _gt?: InputMaybe<Scalars['timetz']['input']>;
+  _gte?: InputMaybe<Scalars['timetz']['input']>;
+  _in?: InputMaybe<Array<Scalars['timetz']['input']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']['input']>;
+  _lt?: InputMaybe<Scalars['timetz']['input']>;
+  _lte?: InputMaybe<Scalars['timetz']['input']>;
+  _neq?: InputMaybe<Scalars['timetz']['input']>;
+  _nin?: InputMaybe<Array<Scalars['timetz']['input']>>;
+};
+
 /** Boolean expression to compare columns of type "uuid". All fields are combined with logical 'AND'. */
 export type ApiUuidComparisonExp = {
   _eq?: InputMaybe<Scalars['uuid']['input']>;
@@ -8112,35 +8522,37 @@ export type ApiVisit = {
   created_at: Scalars['timestamptz']['output'];
   date: Scalars['date']['output'];
   description?: Maybe<Scalars['String']['output']>;
-  /** An array relationship */
-  documents: Array<ApiDocument>;
-  /** An aggregate relationship */
-  documents_aggregate: ApiDocumentAggregate;
   household_id: Scalars['uuid']['output'];
   id: Scalars['uuid']['output'];
   name: Scalars['String']['output'];
   status: VisitStatusEnum;
+  /** An array relationship */
+  visit_documents: Array<ApiVisitDocument>;
+  /** An aggregate relationship */
+  visit_documents_aggregate: ApiVisitDocumentAggregate;
+  /** An object relationship */
+  visit_status: ApiVisitStatus;
   visitor?: Maybe<Scalars['String']['output']>;
 };
 
 
 /** columns and relationships of "visit" */
-export type ApiVisitApiDocumentsArgs = {
-  distinct_on?: InputMaybe<Array<ApiDocumentSelectColumn>>;
+export type ApiVisitApiVisitDocumentsArgs = {
+  distinct_on?: InputMaybe<Array<ApiVisitDocumentSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<ApiDocumentOrderBy>>;
-  where?: InputMaybe<ApiDocumentBoolExp>;
+  order_by?: InputMaybe<Array<ApiVisitDocumentOrderBy>>;
+  where?: InputMaybe<ApiVisitDocumentBoolExp>;
 };
 
 
 /** columns and relationships of "visit" */
-export type ApiVisitApiDocumentsAggregateArgs = {
-  distinct_on?: InputMaybe<Array<ApiDocumentSelectColumn>>;
+export type ApiVisitApiVisitDocumentsAggregateArgs = {
+  distinct_on?: InputMaybe<Array<ApiVisitDocumentSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<ApiDocumentOrderBy>>;
-  where?: InputMaybe<ApiDocumentBoolExp>;
+  order_by?: InputMaybe<Array<ApiVisitDocumentOrderBy>>;
+  where?: InputMaybe<ApiVisitDocumentBoolExp>;
 };
 
 /** aggregated selection of "visit" */
@@ -8148,6 +8560,17 @@ export type ApiVisitAggregate = {
   __typename?: 'visit_aggregate';
   aggregate?: Maybe<ApiVisitAggregateFields>;
   nodes: Array<ApiVisit>;
+};
+
+export type ApiVisitAggregateBoolExp = {
+  count?: InputMaybe<ApiVisitAggregateBoolExpCount>;
+};
+
+export type ApiVisitAggregateBoolExpCount = {
+  arguments?: InputMaybe<Array<ApiVisitSelectColumn>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+  filter?: InputMaybe<ApiVisitBoolExp>;
+  predicate: ApiIntComparisonExp;
 };
 
 /** aggregate fields of "visit" */
@@ -8165,6 +8588,20 @@ export type ApiVisitAggregateFieldsApiCountArgs = {
   distinct?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
+/** order by aggregate values of table "visit" */
+export type ApiVisitAggregateOrderBy = {
+  count?: InputMaybe<ApiOrderBy>;
+  max?: InputMaybe<ApiVisitMaxOrderBy>;
+  min?: InputMaybe<ApiVisitMinOrderBy>;
+};
+
+/** input type for inserting array relation for remote table "visit" */
+export type ApiVisitArrRelInsertInput = {
+  data: Array<ApiVisitInsertInput>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<ApiVisitOnConflict>;
+};
+
 /** Boolean expression to filter rows from the table "visit". All fields are combined with a logical 'AND'. */
 export type ApiVisitBoolExp = {
   _and?: InputMaybe<Array<ApiVisitBoolExp>>;
@@ -8173,12 +8610,13 @@ export type ApiVisitBoolExp = {
   created_at?: InputMaybe<ApiTimestamptzComparisonExp>;
   date?: InputMaybe<ApiDateComparisonExp>;
   description?: InputMaybe<ApiStringComparisonExp>;
-  documents?: InputMaybe<ApiDocumentBoolExp>;
-  documents_aggregate?: InputMaybe<ApiDocumentAggregateBoolExp>;
   household_id?: InputMaybe<ApiUuidComparisonExp>;
   id?: InputMaybe<ApiUuidComparisonExp>;
   name?: InputMaybe<ApiStringComparisonExp>;
   status?: InputMaybe<VisitStatusEnumComparisonExp>;
+  visit_documents?: InputMaybe<ApiVisitDocumentBoolExp>;
+  visit_documents_aggregate?: InputMaybe<ApiVisitDocumentAggregateBoolExp>;
+  visit_status?: InputMaybe<ApiVisitStatusBoolExp>;
   visitor?: InputMaybe<ApiStringComparisonExp>;
 };
 
@@ -8188,16 +8626,209 @@ export enum ApiVisitConstraint {
   VisitPkey = 'visit_pkey'
 }
 
+/** columns and relationships of "visit_document" */
+export type ApiVisitDocument = {
+  __typename?: 'visit_document';
+  /** An object relationship */
+  document: ApiDocument;
+  document_id: Scalars['uuid']['output'];
+  id: Scalars['uuid']['output'];
+  visit_id: Scalars['uuid']['output'];
+};
+
+/** aggregated selection of "visit_document" */
+export type ApiVisitDocumentAggregate = {
+  __typename?: 'visit_document_aggregate';
+  aggregate?: Maybe<ApiVisitDocumentAggregateFields>;
+  nodes: Array<ApiVisitDocument>;
+};
+
+export type ApiVisitDocumentAggregateBoolExp = {
+  count?: InputMaybe<ApiVisitDocumentAggregateBoolExpCount>;
+};
+
+export type ApiVisitDocumentAggregateBoolExpCount = {
+  arguments?: InputMaybe<Array<ApiVisitDocumentSelectColumn>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+  filter?: InputMaybe<ApiVisitDocumentBoolExp>;
+  predicate: ApiIntComparisonExp;
+};
+
+/** aggregate fields of "visit_document" */
+export type ApiVisitDocumentAggregateFields = {
+  __typename?: 'visit_document_aggregate_fields';
+  count: Scalars['Int']['output'];
+  max?: Maybe<ApiVisitDocumentMaxFields>;
+  min?: Maybe<ApiVisitDocumentMinFields>;
+};
+
+
+/** aggregate fields of "visit_document" */
+export type ApiVisitDocumentAggregateFieldsApiCountArgs = {
+  columns?: InputMaybe<Array<ApiVisitDocumentSelectColumn>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** order by aggregate values of table "visit_document" */
+export type ApiVisitDocumentAggregateOrderBy = {
+  count?: InputMaybe<ApiOrderBy>;
+  max?: InputMaybe<ApiVisitDocumentMaxOrderBy>;
+  min?: InputMaybe<ApiVisitDocumentMinOrderBy>;
+};
+
+/** input type for inserting array relation for remote table "visit_document" */
+export type ApiVisitDocumentArrRelInsertInput = {
+  data: Array<ApiVisitDocumentInsertInput>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<ApiVisitDocumentOnConflict>;
+};
+
+/** Boolean expression to filter rows from the table "visit_document". All fields are combined with a logical 'AND'. */
+export type ApiVisitDocumentBoolExp = {
+  _and?: InputMaybe<Array<ApiVisitDocumentBoolExp>>;
+  _not?: InputMaybe<ApiVisitDocumentBoolExp>;
+  _or?: InputMaybe<Array<ApiVisitDocumentBoolExp>>;
+  document?: InputMaybe<ApiDocumentBoolExp>;
+  document_id?: InputMaybe<ApiUuidComparisonExp>;
+  id?: InputMaybe<ApiUuidComparisonExp>;
+  visit_id?: InputMaybe<ApiUuidComparisonExp>;
+};
+
+/** unique or primary key constraints on table "visit_document" */
+export enum ApiVisitDocumentConstraint {
+  /** unique or primary key constraint on columns "id" */
+  VisitDocumentPkey = 'visit_document_pkey',
+  /** unique or primary key constraint on columns "visit_id", "document_id" */
+  VisitDocumentVisitIdDocumentIdKey = 'visit_document_visit_id_document_id_key'
+}
+
+/** input type for inserting data into table "visit_document" */
+export type ApiVisitDocumentInsertInput = {
+  document?: InputMaybe<ApiDocumentObjRelInsertInput>;
+  document_id?: InputMaybe<Scalars['uuid']['input']>;
+  id?: InputMaybe<Scalars['uuid']['input']>;
+  visit_id?: InputMaybe<Scalars['uuid']['input']>;
+};
+
+/** aggregate max on columns */
+export type ApiVisitDocumentMaxFields = {
+  __typename?: 'visit_document_max_fields';
+  document_id?: Maybe<Scalars['uuid']['output']>;
+  id?: Maybe<Scalars['uuid']['output']>;
+  visit_id?: Maybe<Scalars['uuid']['output']>;
+};
+
+/** order by max() on columns of table "visit_document" */
+export type ApiVisitDocumentMaxOrderBy = {
+  document_id?: InputMaybe<ApiOrderBy>;
+  id?: InputMaybe<ApiOrderBy>;
+  visit_id?: InputMaybe<ApiOrderBy>;
+};
+
+/** aggregate min on columns */
+export type ApiVisitDocumentMinFields = {
+  __typename?: 'visit_document_min_fields';
+  document_id?: Maybe<Scalars['uuid']['output']>;
+  id?: Maybe<Scalars['uuid']['output']>;
+  visit_id?: Maybe<Scalars['uuid']['output']>;
+};
+
+/** order by min() on columns of table "visit_document" */
+export type ApiVisitDocumentMinOrderBy = {
+  document_id?: InputMaybe<ApiOrderBy>;
+  id?: InputMaybe<ApiOrderBy>;
+  visit_id?: InputMaybe<ApiOrderBy>;
+};
+
+/** response of any mutation on the table "visit_document" */
+export type ApiVisitDocumentMutationResponse = {
+  __typename?: 'visit_document_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']['output'];
+  /** data from the rows affected by the mutation */
+  returning: Array<ApiVisitDocument>;
+};
+
+/** on_conflict condition type for table "visit_document" */
+export type ApiVisitDocumentOnConflict = {
+  constraint: ApiVisitDocumentConstraint;
+  update_columns?: Array<ApiVisitDocumentUpdateColumn>;
+  where?: InputMaybe<ApiVisitDocumentBoolExp>;
+};
+
+/** Ordering options when selecting data from "visit_document". */
+export type ApiVisitDocumentOrderBy = {
+  document?: InputMaybe<ApiDocumentOrderBy>;
+  document_id?: InputMaybe<ApiOrderBy>;
+  id?: InputMaybe<ApiOrderBy>;
+  visit_id?: InputMaybe<ApiOrderBy>;
+};
+
+/** primary key columns input for table: visit_document */
+export type ApiVisitDocumentPkColumnsInput = {
+  id: Scalars['uuid']['input'];
+};
+
+/** select columns of table "visit_document" */
+export enum ApiVisitDocumentSelectColumn {
+  /** column name */
+  DocumentId = 'document_id',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  VisitId = 'visit_id'
+}
+
+/** input type for updating data in table "visit_document" */
+export type ApiVisitDocumentSetInput = {
+  document_id?: InputMaybe<Scalars['uuid']['input']>;
+  id?: InputMaybe<Scalars['uuid']['input']>;
+  visit_id?: InputMaybe<Scalars['uuid']['input']>;
+};
+
+/** Streaming cursor of the table "visit_document" */
+export type ApiVisitDocumentStreamCursorInput = {
+  /** Stream column input with initial value */
+  initial_value: ApiVisitDocumentStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<ApiCursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type ApiVisitDocumentStreamCursorValueInput = {
+  document_id?: InputMaybe<Scalars['uuid']['input']>;
+  id?: InputMaybe<Scalars['uuid']['input']>;
+  visit_id?: InputMaybe<Scalars['uuid']['input']>;
+};
+
+/** update columns of table "visit_document" */
+export enum ApiVisitDocumentUpdateColumn {
+  /** column name */
+  DocumentId = 'document_id',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  VisitId = 'visit_id'
+}
+
+export type ApiVisitDocumentUpdates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<ApiVisitDocumentSetInput>;
+  /** filter the rows which have to be updated */
+  where: ApiVisitDocumentBoolExp;
+};
+
 /** input type for inserting data into table "visit" */
 export type ApiVisitInsertInput = {
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   date?: InputMaybe<Scalars['date']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
-  documents?: InputMaybe<ApiDocumentArrRelInsertInput>;
   household_id?: InputMaybe<Scalars['uuid']['input']>;
   id?: InputMaybe<Scalars['uuid']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   status?: InputMaybe<VisitStatusEnum>;
+  visit_documents?: InputMaybe<ApiVisitDocumentArrRelInsertInput>;
+  visit_status?: InputMaybe<ApiVisitStatusObjRelInsertInput>;
   visitor?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -8213,6 +8844,17 @@ export type ApiVisitMaxFields = {
   visitor?: Maybe<Scalars['String']['output']>;
 };
 
+/** order by max() on columns of table "visit" */
+export type ApiVisitMaxOrderBy = {
+  created_at?: InputMaybe<ApiOrderBy>;
+  date?: InputMaybe<ApiOrderBy>;
+  description?: InputMaybe<ApiOrderBy>;
+  household_id?: InputMaybe<ApiOrderBy>;
+  id?: InputMaybe<ApiOrderBy>;
+  name?: InputMaybe<ApiOrderBy>;
+  visitor?: InputMaybe<ApiOrderBy>;
+};
+
 /** aggregate min on columns */
 export type ApiVisitMinFields = {
   __typename?: 'visit_min_fields';
@@ -8223,6 +8865,17 @@ export type ApiVisitMinFields = {
   id?: Maybe<Scalars['uuid']['output']>;
   name?: Maybe<Scalars['String']['output']>;
   visitor?: Maybe<Scalars['String']['output']>;
+};
+
+/** order by min() on columns of table "visit" */
+export type ApiVisitMinOrderBy = {
+  created_at?: InputMaybe<ApiOrderBy>;
+  date?: InputMaybe<ApiOrderBy>;
+  description?: InputMaybe<ApiOrderBy>;
+  household_id?: InputMaybe<ApiOrderBy>;
+  id?: InputMaybe<ApiOrderBy>;
+  name?: InputMaybe<ApiOrderBy>;
+  visitor?: InputMaybe<ApiOrderBy>;
 };
 
 /** response of any mutation on the table "visit" */
@@ -8246,11 +8899,12 @@ export type ApiVisitOrderBy = {
   created_at?: InputMaybe<ApiOrderBy>;
   date?: InputMaybe<ApiOrderBy>;
   description?: InputMaybe<ApiOrderBy>;
-  documents_aggregate?: InputMaybe<ApiDocumentAggregateOrderBy>;
   household_id?: InputMaybe<ApiOrderBy>;
   id?: InputMaybe<ApiOrderBy>;
   name?: InputMaybe<ApiOrderBy>;
   status?: InputMaybe<ApiOrderBy>;
+  visit_documents_aggregate?: InputMaybe<ApiVisitDocumentAggregateOrderBy>;
+  visit_status?: InputMaybe<ApiVisitStatusOrderBy>;
   visitor?: InputMaybe<ApiOrderBy>;
 };
 
@@ -8371,6 +9025,13 @@ export type ApiVisitStatusMutationResponse = {
   affected_rows: Scalars['Int']['output'];
   /** data from the rows affected by the mutation */
   returning: Array<ApiVisitStatus>;
+};
+
+/** input type for inserting object relation for remote table "visit_status" */
+export type ApiVisitStatusObjRelInsertInput = {
+  data: ApiVisitStatusInsertInput;
+  /** upsert condition */
+  on_conflict?: InputMaybe<ApiVisitStatusOnConflict>;
 };
 
 /** on_conflict condition type for table "visit_status" */

@@ -26,10 +26,10 @@ export const getVisitDetail = (data: ApiVisitDetailFragment): VisitDetail => {
     status: data.status,
     date: toDate(data.date)!,
     description: data.description ?? undefined,
-    documents: data.documents.map(d => ({
-      storageId: d.id,
-      url: d.url,
-      id: d.id,
+    documents: data.visit_documents.map(d => ({
+      storageId: d.document.id,
+      url: d.document.url,
+      id: d.document.id,
     })),
   };
 };
@@ -40,10 +40,10 @@ export const getVisitListItem = (
   return {
     date: toDate(data.date)!,
     description: data.description ?? undefined,
-    documents: data.documents.map(d => ({
-      storageId: d.id,
-      url: d.url,
-      id: d.id,
+    documents: data.visit_documents.map(d => ({
+      storageId: d.document.id,
+      url: d.document.url,
+      id: d.document.id,
     })),
   };
 };

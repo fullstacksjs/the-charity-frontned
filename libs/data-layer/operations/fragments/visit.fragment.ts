@@ -15,10 +15,12 @@ export const VisitDetailFragment = gql`
     id
     description
     status
-    documents {
-      url
-      id
-      storage_id
+    visit_documents {
+      document {
+        url
+        id
+        storage_id
+      }
     }
   }
 `;
@@ -27,10 +29,12 @@ export const VisitListItemFragment = gql`
   fragment VisitListItem on visit {
     date
     description
-    documents {
-      url
-      id
-      storage_id
+    visit_documents {
+      document {
+        url
+        id
+        storage_id
+      }
     }
   }
 `;

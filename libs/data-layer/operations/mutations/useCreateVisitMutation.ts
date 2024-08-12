@@ -60,8 +60,12 @@ const toApiVariables = (
     description: variables.description,
     visitor: variables.visitor,
     household_id: variables.householdId,
-    documents: {
-      data: variables.documents.map(d => ({ url: d.url, storage_id: d.id })),
+    visit_documents: {
+      data: variables.documents.map(d => ({
+        document: {
+          data: { url: d.url, storage_id: d.id },
+        },
+      })),
     },
     date: variables.date.toISOString(),
   },
