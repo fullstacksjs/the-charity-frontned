@@ -2,7 +2,6 @@ import { isNull, pruneValueWhen } from '@fullstacksjs/toolbox';
 
 import { householderFormIds as ids } from '../../app/Dashboard/Households/HouseholdDetail/_components/HouseholderForm/_components/HouseholderIdentityForm/HouseholderIdentityForm.ids';
 import { householdDetailIds as tabIds } from '../../app/Dashboard/Households/HouseholdDetail/HouseholdDetail.ids';
-import { messages } from '../../app/messages';
 import { AppRoute } from '../../libs/router/AppRoutes';
 import { admin } from '../fixtures/admin';
 import { householdFixture } from '../fixtures/household';
@@ -33,12 +32,23 @@ const idMapping = {
   surname: { id: ids.lastNameInput, type: 'text' },
   fatherName: { id: ids.fatherNameInput, type: 'text' },
   nationalId: { id: ids.nationalIdInput, type: 'text' },
-  gender: { id: ids.genderInput, type: 'select', options: messages.genders },
+  gender: {
+    id: ids.genderInput,
+    type: 'select',
+    options: {
+      Male: 'مرد',
+      Female: 'زن',
+      Unknown: 'نامشخص',
+    },
+  },
 
   religion: {
     id: ids.religionInput,
     type: 'select',
-    options: messages.religions,
+    options: {
+      Islam: 'اسلام',
+      Unknown: 'نامشخص',
+    },
   },
   dob: {
     id: ids.dobInput,

@@ -1,6 +1,5 @@
 import { Config } from '@fullstacksjs/config';
 import { defineConfig } from 'cypress';
-import viteProcessor from 'cypress-vite';
 
 import { config } from './vite.config';
 
@@ -56,9 +55,6 @@ export default defineConfig({
       APP_AUTH0_CLIENT_ID: envs.get('auth0.clientId'),
       APP_API_ENDPOINT: envs.get(`api.endpoint`),
       APP_HASURA_ADMIN_SECRET: envs.get('api.secret'),
-    },
-    setupNodeEvents(on) {
-      on('file:preprocessor', viteProcessor());
     },
   },
   component: {

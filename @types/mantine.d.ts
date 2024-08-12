@@ -1,5 +1,3 @@
-import type { Tuple } from '@mantine/core';
-
 import type { Palette } from '../libs/design/theme/palette';
 
 type DefaultMantineColors =
@@ -25,6 +23,6 @@ type Colors = IndexifyColor<Palette | 'transparent'>;
 
 declare module '@mantine/core' {
   export interface MantineThemeColorsOverride {
-    colors: Record<Colors, Tuple<string, 10>>;
+    colors: Record<Colors, MantineColorsTuple>;
   }
 }

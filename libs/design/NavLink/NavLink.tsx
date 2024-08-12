@@ -45,8 +45,7 @@ export const NavLink = ({
         // NOTE: Seems to be a Mantine bug
         span: { fontSize: theme.fontSizes.md },
       })}
-      to={to}
-      // @ts-expect-error polymorphic behavior
+      to={to!}
       component={to ? Link : undefined}
       key={label}
       label={label}

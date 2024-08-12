@@ -18,26 +18,22 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
-
       - uses: actions/setup-node@v3
         with:
           node-version-file: 'package.json'
-          cache: 'pnpm'
+          cache: 'npm'
 
       - name: Install dependencies
-        run: pnpm install
+        run: npm install
 
       - name: Lint and Format
-        run: pnpm run lint:ci
+        run: npm run lint:ci
 
       - name: Build
-        run: pnpm run build
+        run: npm run build
 
       - name: Test
-        run: pnpm run test:unit
+        run: npm run test:unit
 
   chromatic:
     runs-on: ubuntu-latest
@@ -61,17 +57,13 @@ jobs:
           # NOTE: required because https://www.chromatic.com/docs/github-actions#support-for-codeactionscheckoutv2code-and-above
           fetch-depth: 0
 
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
-
       - uses: actions/setup-node@v3
         with:
           node-version-file: 'package.json'
-          cache: 'pnpm'
+          cache: 'npm'
 
       - name: Install dependencies
-        run: pnpm install
+        run: npm install
 
       - name: Deploy Chromatic
         uses: chromaui/action@v1
@@ -98,15 +90,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
-
       - name: Run E2E tests
         uses: cypress-io/github-action@v4
         with:
-          start: pnpm exec vite --port ${{ env.PORT }} --host 127.0.0.1
-          build: pnpm run build
+          start: npm exec vite --port ${{ env.PORT }} --host 127.0.0.1
+          build: npm run build
           wait-on: https://127.0.0.1:${{ env.PORT }}
           wait-on-timeout: 20
           browser: chrome

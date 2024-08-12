@@ -1,10 +1,18 @@
 import { gql, GraphQLClient } from 'graphql-request';
 
-import type { Household, HouseholdSeverityEnum } from '../../libs/domain';
-
 const client = new GraphQLClient(Cypress.env('APP_API_ENDPOINT'), {
   headers: { 'x-hasura-admin-secret': Cypress.env('APP_HASURA_ADMIN_SECRET') },
 });
+
+interface Household {
+  id: string;
+  name: string;
+  code: string;
+  createdAt: Date;
+  updatedAt: Date;
+  isCompleted: boolean;
+  membersCount: number;
+}
 
 export interface Id {
   id: string;
@@ -12,7 +20,7 @@ export interface Id {
 
 export function createHousehold(
   name: string,
-  severity?: HouseholdSeverityEnum,
+  severity?: 'Critical' | 'Normal',
 ) {
   const variables = `
     name: "${name}",
