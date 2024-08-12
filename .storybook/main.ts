@@ -4,10 +4,12 @@ const config: StorybookConfig = {
   addons: [
     '@storybook/addon-essentials',
     'storybook-addon-apollo-client',
+    '@chromatic-com/storybook',
   ],
   framework: '@storybook/react-vite',
-  docs: {
-    autodocs: false,
+  docs: {},
+  typescript: {
+    reactDocgen: 'react-docgen-typescript',
   },
 };
 export default config;

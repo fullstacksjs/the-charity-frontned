@@ -12,7 +12,6 @@ import { ThemeProvider } from '../libs/design';
 import '../libs/zod-addons/monkeyPatchZod';
 
 const parameters: Parameters = {
-  actions: { argTypesRegex: '^on[A-Z].*' },
   controls: {
     expanded: true,
     matchers: {

@@ -1,10 +1,8 @@
 import { useUpsertHouseholderMutation } from '@camp/data-layer';
 import { ControlledDateInput, ControlledSelect, TextInput } from '@camp/design';
 import type {
-  CityEnum,
   GenderEnum,
   HouseholderIdentity,
-  NationalityEnum,
   ReligionEnum,
 } from '@camp/domain';
 import {
