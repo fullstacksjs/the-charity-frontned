@@ -16,7 +16,7 @@ jobs:
     timeout-minutes: 10
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v3
         with:
@@ -52,9 +52,8 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
-          # NOTE: required because https://www.chromatic.com/docs/github-actions#support-for-codeactionscheckoutv2code-and-above
           fetch-depth: 0
 
 
@@ -89,7 +88,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - uses: actions/setup-node@v3
         with:
@@ -97,21 +96,21 @@ jobs:
           cache: 'npm'
 
       - name: Run E2E tests
-        uses: cypress-io/github-action@v4
-        with:
-          start: npm exec vite --port ${{ env.PORT }} --host 127.0.0.1
-          build: npm run build
-          wait-on: https://127.0.0.1:${{ env.PORT }}
-          wait-on-timeout: 20
-          browser: chrome
-
+        uses: cypress-io/github-action@v6
         env:
           PORT: 3002
           CYPRESS_RECORD_KEY: ${{ vars.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+        with:
+          start: npm exec vite --host 127.0.0.1
+          build: npm run build
+          wait-on: https://127.0.0.1:${{ env.PORT }}
+          wait-on-timeout: 20
+          browser: chrome
+
       - name: Run Component tests
-        uses: cypress-io/github-action@v4
+        uses: cypress-io/github-action@v6
         with:
           install: false
           component: true
