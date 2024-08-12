@@ -104,6 +104,7 @@ jobs:
           wait-on: https://127.0.0.1:${{ env.PORT }}
           wait-on-timeout: 20
           browser: chrome
+          env: port=${{ env.PORT }}
 
       - name: Run Component tests
         uses: cypress-io/github-action@v6
