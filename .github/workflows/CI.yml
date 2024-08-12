@@ -94,14 +94,13 @@ jobs:
       - name: Run E2E tests
         uses: cypress-io/github-action@v6
         env:
-          PORT: 3002
+          PORT: 5173
           CYPRESS_RECORD_KEY: ${{ vars.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
         with:
-          start: PORT=${{ env.PORT }} npx vite --host 127.0.0.1
-          build: npm run build
-          wait-on: https://127.0.0.1:${{ env.PORT }}
+          start: npx vite --host 127.0.0.1
+          wait-on: https://127.0.0.1:5173
           wait-on-timeout: 20
           browser: chrome
 
