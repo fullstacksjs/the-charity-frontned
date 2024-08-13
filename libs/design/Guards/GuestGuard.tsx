@@ -1,10 +1,10 @@
 import { useAuth0 } from '@auth0/auth0-react';
-import type { AppRoute } from '@camp/router';
+import type { LinkProps } from '@camp/router';
 import { Navigate, Outlet } from '@camp/router';
 
 interface Props {
   children?: JSX.Element;
-  to?: AppRoute;
+  to?: LinkProps['to'];
 }
 
 const defaultChildren = <Outlet />;

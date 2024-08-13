@@ -1,7 +1,7 @@
 import { householdDetailIds } from '../../libs/pages/Households/HouseholdDetail/HouseholdDetail.ids';
-import { AppRoute } from '../../libs/router/AppRoutes';
 import { admin } from '../fixtures/admin';
 import { householdFixture } from '../fixtures/household';
+import { Routes } from '../support/routes';
 import * as API from './api';
 
 interface Household {
@@ -19,7 +19,7 @@ describe('Household', () => {
     cy.wrap<Promise<Household>, Household>(
       API.createHousehold(name, 'Critical'),
     ).then(household => {
-      cy.visit(AppRoute.householdDetail, { params: { id: household.id } });
+      cy.visit(Routes.HouseholdDetail, { params: { id: household.id } });
       cy.findByTestId(householdDetailIds.nameField)
         .find('input')
         .should('have.value', household.name);
@@ -38,7 +38,7 @@ describe('Household', () => {
     cy.wrap<Promise<Household>, Household>(
       API.createHousehold(h2Name, 'Normal'),
     ).then(household => {
-      cy.visit(AppRoute.householdDetail, { params: { id: household.id } });
+      cy.visit(Routes.HouseholdDetail, { params: { id: household.id } });
       cy.findByTestId(householdDetailIds.nameField)
         .find('input')
         .should('have.value', household.name);

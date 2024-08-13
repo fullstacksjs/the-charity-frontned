@@ -2,10 +2,10 @@ import { isNull, pruneValueWhen } from '@fullstacksjs/toolbox';
 
 import { householdDetailIds as tabIds } from '../../libs/pages/Households/HouseholdDetail/HouseholdDetail.ids';
 import { householderFormIds as ids } from '../../libs/pages/Households/HouseholdDetail/HouseholderForm/HouseholderIdentityForm/HouseholderIdentityForm.ids';
-import { AppRoute } from '../../libs/router/AppRoutes';
 import { admin } from '../fixtures/admin';
 import { householdFixture } from '../fixtures/household';
 import { householderFixture } from '../fixtures/householder';
+import { Routes } from '../support/routes';
 import * as api from './api';
 
 interface TextInput {
@@ -63,7 +63,7 @@ const idMapping = {
 describe('Householder', () => {
   beforeEach(() => {
     cy.login(admin);
-    cy.visit(AppRoute.households);
+    cy.visit(Routes.Households);
     const name = householdFixture.name();
     cy.wrap(api.createHousehold(name));
     cy.findByText(name).click();

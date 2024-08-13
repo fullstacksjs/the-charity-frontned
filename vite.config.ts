@@ -29,6 +29,9 @@ const envs = new Config({
 interface Options {
   https?: boolean;
 }
+
+const __dirname = import.meta.dirname;
+
 export const config = ({ https = true }: Options = {}): UserConfig => ({
   plugins: compact([
     https ? basicSsl() : undefined,

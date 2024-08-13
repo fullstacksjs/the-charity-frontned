@@ -24,5 +24,11 @@ module.exports = init({
         'node/prefer-global/buffer': 'off',
       },
     },
+    {
+      files: ['./app/**/*.tsx'],
+      rules: {
+        'react/function-component-definition': 'off',
+      },
+    },
   ],
 });

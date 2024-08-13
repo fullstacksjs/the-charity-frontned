@@ -4,7 +4,7 @@ declare namespace Cypress {
     mount: typeof import('cypress/react18').mount;
     findNotification: (type: 'failure' | 'success') => Chainable<JQuery>;
     visit(
-      url: import('../../../libs/router/AppRoutes').AppRoute,
+      url: import('@tanstack/react-router').LinkProps['to'],
       options?: Partial<VisitOptions> & { params?: Record<string, string> },
     ): Chainable<AUTWindow>;
     waitForReq(): void;

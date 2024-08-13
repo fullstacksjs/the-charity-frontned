@@ -24,7 +24,7 @@ import {
 } from '@camp/domain';
 import { ArrowUpIcon, CheckIcon, EditIcon, TrashIcon } from '@camp/icons';
 import { errorMessages, messages } from '@camp/messages';
-import { AppRoute, useNavigate } from '@camp/router';
+import { useNavigate } from '@camp/router';
 import { InformationBadge, SeverityBadge } from '@camp/shared-components';
 import { tid } from '@camp/test';
 import { isNull } from '@fullstacksjs/toolbox';
@@ -135,7 +135,7 @@ export const HouseholdDetail = ({ id }: { id: string }) => {
         message: tNotification.delete.success(household.name),
         type: 'success',
       });
-      await navigate({ to: AppRoute.dashboard });
+      await navigate({ to: '/dashboard/households' });
     } catch (err) {
       debug.error(err);
       showNotification({

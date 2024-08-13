@@ -4,7 +4,6 @@ import { ThemeProvider } from '@camp/design';
 import { createRootRouteWithContext, Navigate, Outlet } from '@camp/router';
 import { ModalsProvider } from '@mantine/modals';
 import { Notifications } from '@mantine/notifications';
-import { TanStackRouterDevtools } from '@tanstack/router-devtools';
 
 import type { RouterContext } from '../main';
 
@@ -12,7 +11,6 @@ const Root = () => {
   return (
     <AuthProvider>
       <ApolloProvider>
-        <TanStackRouterDevtools />
         <ThemeProvider>
           <ModalsProvider>
             <Outlet />
