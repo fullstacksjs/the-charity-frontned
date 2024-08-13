@@ -13,8 +13,8 @@ import { useState } from 'react';
 
 import { InformationBadge } from '../../+components/InformationBadge';
 import { SeverityBadge } from '../../+components/SeverityBadge';
-import { CreateHouseholdButton } from '../+components/CreateHousehold';
-import { HouseholdActionButton } from '../+components/HouseholdActionButton';
+import { CreateHouseholdButton } from '../CreateHousehold';
+import { HouseholdActionButton } from '../HouseholdActionButton';
 import { HouseholdEmptyState } from '../HouseholdEmptyState';
 import * as ids from './HouseholdList.ids';
 import { HouseholdTable } from './HouseholdTable';

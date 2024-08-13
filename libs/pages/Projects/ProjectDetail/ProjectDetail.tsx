@@ -10,7 +10,7 @@ import { useParams } from '@camp/router';
 import { isEmpty, isNull } from '@fullstacksjs/toolbox';
 import { Text, Title } from '@mantine/core';
 
-import { ProjectStatusBadge } from '../+components/ProjectStatusBadge';
+import { ProjectStatusBadge } from '../ProjectStatusBadge';
 import { ProjectDocuments } from './_components/ProjectDocuments';
 import { ProjectDetailIds as ids } from './ProjectDetail.ids';
 

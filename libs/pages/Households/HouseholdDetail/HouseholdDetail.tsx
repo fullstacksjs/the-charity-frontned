@@ -33,12 +33,12 @@ import { useForm } from 'react-hook-form';
 
 import { InformationBadge } from '../../+components/InformationBadge';
 import { SeverityBadge } from '../../+components/SeverityBadge';
-import { openDeleteHouseholdModal } from '../+components/DeleteHouseholdModal';
-import { HouseholderDetail } from './_components/HouseholderDetail';
-import { HouseholderVisits } from './_components/HouseholderVisits';
-import { MemberList } from './_components/MemberList';
+import { openDeleteHouseholdModal } from '../DeleteHouseholdModal';
 import { householdDetailIds as ids } from './HouseholdDetail.ids';
+import { HouseholderDetail } from './HouseholderDetail';
+import { HouseholderVisits } from './HouseholderVisits';
 import { householdNotifications } from './householdNotifications';
+import { MemberList } from './MemberList';
 
 interface FormSchema {
   name: string;

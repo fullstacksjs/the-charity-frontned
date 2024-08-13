@@ -28,8 +28,8 @@ import { SimpleGrid, Stack } from '@mantine/core';
 import { useBoolean } from 'ahooks';
 import { useForm } from 'react-hook-form';
 
-import { householdNotifications } from '../../../../householdNotifications';
-import { HouseholderFormActions } from '../../HouseholderFormActions';
+import { householdNotifications } from '../../householdNotifications';
+import { HouseholderFormActions } from '../HouseholderFormActions';
 import { HouseholderFinancialFormIds as ids } from './HouseholderFinancialForm.ids';
 
 interface Props {
