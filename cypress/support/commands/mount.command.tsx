@@ -6,6 +6,7 @@ import {
 } from '@apollo/client';
 import { ModalsProvider } from '@mantine/modals';
 import {
+  createMemoryHistory,
   createRootRoute,
   createRouter,
   RouterProvider,
@@ -27,13 +28,14 @@ Cypress.Commands.add(
         }
       >
         <ThemeProvider>
-          <ModalsProvider>
-            <RouterProvider
-              router={createRouter({
-                routeTree: createRootRoute({ component: () => element }),
-              })}
-            />
-          </ModalsProvider>
+          <RouterProvider
+            router={createRouter({
+              routeTree: createRootRoute({
+                component: () => <ModalsProvider>{element}</ModalsProvider>,
+              }),
+              history: createMemoryHistory({ initialEntries: ['/'] }),
+            })}
+          />
         </ThemeProvider>
       </ApolloProvider>,
       ...rest,
