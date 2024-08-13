@@ -20,6 +20,7 @@
       "@camp/icons": ["./libs/icons/index.ts"],
       "@camp/infra": ["./libs/infra/index.ts"],
       "@camp/messages": ["./app/messages.ts"],
+      "@camp/pages/*": ["./libs/pages/*"],
       "@camp/router": ["./libs/router/index.ts"],
       "@camp/test": ["./libs/test/index.ts"],
       "@camp/zod-addons": ["./libs/zod-addons/index.ts"],

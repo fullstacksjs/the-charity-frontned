@@ -2,7 +2,7 @@ import { useAuth0 } from '@camp/auth';
 import { messages } from '@camp/messages';
 import { Button, Center, Flex, Image, Text, Title } from '@mantine/core';
 
-export const Login = () => {
+export const LoginPage = () => {
   const { loginWithRedirect } = useAuth0();
 
   return (

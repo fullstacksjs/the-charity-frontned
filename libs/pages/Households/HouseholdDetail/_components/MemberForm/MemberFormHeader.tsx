@@ -1,7 +1,7 @@
 import { messages } from '@camp/messages';
 import { Group, Title } from '@mantine/core';
 
-import { InformationBadge } from '../../../../_components/InformationBadge';
+import { InformationBadge } from '../../../../+components/InformationBadge';
 
 const t = messages.member;
 

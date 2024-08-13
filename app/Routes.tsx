@@ -1,10 +1,7 @@
 import { AuthGuard, GuestGuard } from '@camp/auth';
 import { config } from '@camp/config';
 import { messages } from '@camp/messages';
-import type { Route } from '@camp/router';
-import { lazy, Navigate, ReactLocation, Router } from '@camp/router';
-
-import { Login } from './Auth';
+import { LoginPage } from '@camp/pages/Auth';
 import {
   DashboardLayout,
   HouseholdDetail,
@@ -14,7 +11,9 @@ import {
   ProjectDetail,
   ProjectList,
   ProjectsLayout,
-} from './Dashboard';
+} from '@camp/pages/Dashboard';
+import type { Route } from '@camp/router';
+import { lazy, Navigate, ReactLocation, Router } from '@camp/router';
 
 export const location = new ReactLocation();
 
@@ -30,7 +29,7 @@ const routes: Route[] = [
     path: '/auth',
     element: <GuestGuard />,
     children: [
-      { path: '/login', element: <Login /> },
+      { path: '/login', element: <LoginPage /> },
       { element: <Navigate to="/auth/login" /> },
     ],
   },

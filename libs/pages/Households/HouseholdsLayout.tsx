@@ -1,7 +1,7 @@
 import { DashboardHeader } from '@camp/design';
 import { Outlet } from '@camp/router';
 
-import { CreateHouseholdButton } from './_components/CreateHousehold';
+import { CreateHouseholdButton } from './+components/CreateHousehold';
 
 const outlet = <Outlet />;
 

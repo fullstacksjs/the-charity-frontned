@@ -8,7 +8,7 @@ import {
 import { ModalsProvider } from '@mantine/modals';
 import { Notifications } from '@mantine/notifications';
 
-import { DashboardSidebar } from './_components/DashboardSidebar';
+import { DashboardSidebar } from './DashboardSidebar';
 
 const useStyles = createStyles(theme => ({
   body: {

@@ -2,7 +2,7 @@ import { EmptyState } from '@camp/design';
 import { PeopleIcon } from '@camp/icons';
 import { messages } from '@camp/messages';
 
-import { CreateHouseholdButton } from '../_components/CreateHousehold';
+import { CreateHouseholdButton } from '../+components/CreateHousehold';
 
 export const HouseholdEmptyState = () => {
   return (

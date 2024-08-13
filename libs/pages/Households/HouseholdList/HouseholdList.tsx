@@ -11,10 +11,10 @@ import type { PaginationState, SortingState } from '@tanstack/react-table';
 import { getCoreRowModel, useReactTable } from '@tanstack/react-table';
 import { useState } from 'react';
 
-import { InformationBadge } from '../../_components/InformationBadge';
-import { SeverityBadge } from '../../_components/SeverityBadge';
-import { CreateHouseholdButton } from '../_components/CreateHousehold';
-import { HouseholdActionButton } from '../_components/HouseholdActionButton';
+import { InformationBadge } from '../../+components/InformationBadge';
+import { SeverityBadge } from '../../+components/SeverityBadge';
+import { CreateHouseholdButton } from '../+components/CreateHousehold';
+import { HouseholdActionButton } from '../+components/HouseholdActionButton';
 import { HouseholdEmptyState } from '../HouseholdEmptyState';
 import * as ids from './HouseholdList.ids';
 import { HouseholdTable } from './HouseholdTable';

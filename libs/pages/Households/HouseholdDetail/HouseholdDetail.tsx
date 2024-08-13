@@ -31,9 +31,9 @@ import { Button, Flex, Title } from '@mantine/core';
 import { useBoolean } from 'ahooks';
 import { useForm } from 'react-hook-form';
 
-import { InformationBadge } from '../../_components/InformationBadge';
-import { SeverityBadge } from '../../_components/SeverityBadge';
-import { openDeleteHouseholdModal } from '../_components/DeleteHouseholdModal';
+import { InformationBadge } from '../../+components/InformationBadge';
+import { SeverityBadge } from '../../+components/SeverityBadge';
+import { openDeleteHouseholdModal } from '../+components/DeleteHouseholdModal';
 import { HouseholderDetail } from './_components/HouseholderDetail';
 import { HouseholderVisits } from './_components/HouseholderVisits';
 import { MemberList } from './_components/MemberList';

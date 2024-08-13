@@ -1,3 +1,3 @@
-export * from './Auth';
-export * from './Dashboard';
 export * from './GraphiQL';
+export * from '@camp/pages/Auth';
+export * from '@camp/pages/Dashboard';

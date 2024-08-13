@@ -1,7 +1,7 @@
 import { messages } from '@camp/messages';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { DashboardLayout } from '../DashboardLayout';
+import { DashboardLayout } from '../Dashboard/DashboardLayout';
 import { ProjectsLayout } from './ProjectsLayout';
 
 export default {
