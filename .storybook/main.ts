@@ -1,9 +1,6 @@
 import { StorybookConfig } from '@storybook/react-vite';
 const config: StorybookConfig = {
-  stories: [
-    '../libs/design/**/*.stories.tsx',
-    '../libs/pages/**/*.stories.tsx',
-  ],
+  stories: ['../libs/**/*.stories.tsx'],
   addons: [
     '@storybook/addon-essentials',
     'storybook-addon-apollo-client',

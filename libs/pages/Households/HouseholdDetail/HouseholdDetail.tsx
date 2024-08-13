@@ -25,14 +25,13 @@ import {
 import { ArrowUpIcon, CheckIcon, EditIcon, TrashIcon } from '@camp/icons';
 import { errorMessages, messages } from '@camp/messages';
 import { AppRoute, useNavigate, useParams } from '@camp/router';
+import { InformationBadge, SeverityBadge } from '@camp/shared-components';
 import { tid } from '@camp/test';
 import { isNull } from '@fullstacksjs/toolbox';
 import { Button, Flex, Title } from '@mantine/core';
 import { useBoolean } from 'ahooks';
 import { useForm } from 'react-hook-form';
 
-import { InformationBadge } from '../../+components/InformationBadge';
-import { SeverityBadge } from '../../+components/SeverityBadge';
 import { openDeleteHouseholdModal } from '../DeleteHouseholdModal';
 import { householdDetailIds as ids } from './HouseholdDetail.ids';
 import { HouseholderDetail } from './HouseholderDetail';

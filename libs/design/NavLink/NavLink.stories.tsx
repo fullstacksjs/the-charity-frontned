@@ -7,7 +7,6 @@ import { NavLink } from './NavLink';
 
 export default {
   component: NavLink,
-  title: 'NavLink',
   render(args) {
     return (
       <Stack sx={{ width: 300 }}>

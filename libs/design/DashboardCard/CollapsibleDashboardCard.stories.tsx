@@ -4,7 +4,7 @@ import { DashboardTitle } from '../DashboardTitle';
 import { CollapsibleDashboardCard } from './CollapsibleDashboardCard';
 
 export default {
-  title: 'CollapsibleDashboardCard',
+  title: 'design/CollapsibleDashboardCard',
   component: CollapsibleDashboardCard,
 } as Meta<typeof CollapsibleDashboardCard>;
 

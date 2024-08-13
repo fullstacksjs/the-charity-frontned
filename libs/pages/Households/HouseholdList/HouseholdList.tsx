@@ -4,6 +4,7 @@ import { DashboardCard, DashboardTitle, showNotification } from '@camp/design';
 import { householdColumnHelper } from '@camp/domain';
 import { errorMessages, messages } from '@camp/messages';
 import { AppRoute } from '@camp/router';
+import { InformationBadge, SeverityBadge } from '@camp/shared-components';
 import { tid } from '@camp/test';
 import { isEmpty } from '@fullstacksjs/toolbox';
 import { Group } from '@mantine/core';
@@ -11,8 +12,6 @@ import type { PaginationState, SortingState } from '@tanstack/react-table';
 import { getCoreRowModel, useReactTable } from '@tanstack/react-table';
 import { useState } from 'react';
 
-import { InformationBadge } from '../../+components/InformationBadge';
-import { SeverityBadge } from '../../+components/SeverityBadge';
 import { CreateHouseholdButton } from '../CreateHousehold';
 import { HouseholdActionButton } from '../HouseholdActionButton';
 import { HouseholdEmptyState } from '../HouseholdEmptyState';

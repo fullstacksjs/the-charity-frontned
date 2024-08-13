@@ -7,7 +7,7 @@ import { NavLinks } from './NavLinks';
 
 export default {
   component: NavLinks,
-  title: 'NavLinks',
+  title: 'design/NavLinks',
   render: args => (
     <Stack sx={{ width: 300 }}>
       <NavLinks {...args} />
