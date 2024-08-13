@@ -105,6 +105,7 @@ jobs:
           wait-on: https://127.0.0.1:5173
           wait-on-timeout: 20
           browser: chrome
+          record: true
 
       - name: Run Component tests
         uses: cypress-io/github-action@v6
