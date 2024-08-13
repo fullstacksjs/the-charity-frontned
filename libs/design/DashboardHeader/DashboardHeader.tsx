@@ -1,5 +1,5 @@
 import { debug, DebugScopes } from '@camp/debug';
-import { useMatches } from '@camp/router';
+import { useRouterState } from '@camp/router';
 import { tid } from '@camp/test';
 import { Group } from '@mantine/core';
 
@@ -12,20 +12,15 @@ export interface HeaderProps {
 }
 
 export const useBreadcrumbsItems = (): BreadcrumbItem[] => {
-  const matches = useMatches();
+  const matches = useRouterState().matches;
   debug.log(DebugScopes.Breadcrumbs, matches);
 
   return matches
-    .filter(match => Boolean(match.route.meta?.breadcrumb))
-    .filter(match => Boolean(match.route.path))
-    .map(match => {
-      const { meta } = match.route;
-
-      return {
-        path: match.pathname,
-        name: meta!.breadcrumb,
-      };
-    });
+    .map(match => ({
+      name: match.context.getTitle(match.routeId),
+      path: match.pathname,
+    }))
+    .filter(path => path.name);
 };
 
 export const DashboardHeader = ({ button }: HeaderProps) => {

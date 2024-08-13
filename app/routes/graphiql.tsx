@@ -1,13 +1,11 @@
 import 'graphiql/graphiql.css';
 
 import { config } from '@camp/config';
+import { createFileRoute } from '@camp/router';
 import { isNull } from '@fullstacksjs/toolbox';
 import { createGraphiQLFetcher } from '@graphiql/toolkit';
 import { GraphiQL } from 'graphiql';
 import { useEffect } from 'react';
-
-if (config.isDev && (isNull(config.schemaUrl) || isNull(config.hasuraSecret)))
-  throw Error('Hasura Secret is needed');
 
 const fetcher = createGraphiQLFetcher({
   url: config.schemaUrl!,
@@ -25,8 +23,9 @@ const GraphiQLPage = () => {
 
   return <GraphiQL fetcher={fetcher} />;
 };
+export const Route = createFileRoute('/graphiql')({
+  component: GraphiQLPage,
+});
 
-export const routes = {
-  path: '/graphiql',
-  element: <GraphiQLPage />,
-};
+if (config.isDev && (isNull(config.schemaUrl) || isNull(config.hasuraSecret)))
+  throw Error('Hasura Secret is needed');

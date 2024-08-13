@@ -1,4 +1,4 @@
-import { dashboardSidebarIds } from '../../app/Dashboard/_components/DashboardSidebar/DashboardSidebar.ids';
+import { dashboardSidebarIds } from '../../libs/pages/Dashboard/DashboardSidebar/DashboardSidebar.ids';
 import { AppRoute } from '../../libs/router/AppRoutes';
 import { admin } from '../fixtures/admin';
 import { householdFixture } from '../fixtures/household';

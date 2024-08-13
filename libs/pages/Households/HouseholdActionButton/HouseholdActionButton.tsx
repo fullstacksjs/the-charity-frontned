@@ -3,7 +3,7 @@ import { debug } from '@camp/debug';
 import { showNotification } from '@camp/design';
 import { MenuIcon } from '@camp/icons';
 import { messages } from '@camp/messages';
-import type { AppRoute, PathParams } from '@camp/router';
+import type { LinkProps } from '@camp/router';
 import { Link } from '@camp/router';
 import { tid } from '@camp/test';
 import { isNull } from '@fullstacksjs/toolbox';
@@ -13,10 +13,10 @@ import { openDeleteHouseholdModal } from '../DeleteHouseholdModal';
 import { householdActionIds as ids } from './HouseholdActionButton.ids';
 
 interface Props {
-  to: AppRoute;
+  to: LinkProps['to'];
   householdName: string;
   householdId: string;
-  params?: PathParams<AppRoute>;
+  params?: LinkProps['params'];
   menuId?: string;
   menuButtonId?: string;
 }
@@ -68,6 +68,7 @@ export const HouseholdActionButton = ({
         </ActionIcon>
       </Menu.Target>
       <Menu.Dropdown {...tid(menuId)}>
+        {/* @ts-expect-error poor type */}
         <Menu.Item to={to} params={params} component={Link}>
           {messages.actions.open}
         </Menu.Item>

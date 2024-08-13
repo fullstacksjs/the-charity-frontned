@@ -1,9 +1,13 @@
-import { householdDetailIds } from '../../app/Dashboard/Households/HouseholdDetail/HouseholdDetail.ids';
-import type { Household } from '../../libs/domain';
+import { householdDetailIds } from '../../libs/pages/Households/HouseholdDetail/HouseholdDetail.ids';
 import { AppRoute } from '../../libs/router/AppRoutes';
 import { admin } from '../fixtures/admin';
 import { householdFixture } from '../fixtures/household';
 import * as API from './api';
+
+interface Household {
+  id: string;
+  name: string;
+}
 
 describe('Household', () => {
   beforeEach(() => {

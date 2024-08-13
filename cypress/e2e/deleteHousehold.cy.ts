@@ -1,4 +1,4 @@
-import { householdActionIds } from '../../app/Dashboard/Households/_components/HouseholdActionButton/HouseholdActionButton.ids';
+import { householdActionIds } from '../../libs/pages/Households/HouseholdActionButton/HouseholdActionButton.ids';
 import { AppRoute } from '../../libs/router/AppRoutes';
 import { admin } from '../fixtures/admin';
 import { householdFixture } from '../fixtures/household';

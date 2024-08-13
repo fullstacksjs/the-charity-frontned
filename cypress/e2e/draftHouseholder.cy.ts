@@ -1,7 +1,7 @@
 import { isNull, pruneValueWhen } from '@fullstacksjs/toolbox';
 
-import { householderFormIds as ids } from '../../app/Dashboard/Households/HouseholdDetail/_components/HouseholderForm/_components/HouseholderIdentityForm/HouseholderIdentityForm.ids';
-import { householdDetailIds as tabIds } from '../../app/Dashboard/Households/HouseholdDetail/HouseholdDetail.ids';
+import { householdDetailIds as tabIds } from '../../libs/pages/Households/HouseholdDetail/HouseholdDetail.ids';
+import { householderFormIds as ids } from '../../libs/pages/Households/HouseholdDetail/HouseholderForm/HouseholderIdentityForm/HouseholderIdentityForm.ids';
 import { AppRoute } from '../../libs/router/AppRoutes';
 import { admin } from '../fixtures/admin';
 import { householdFixture } from '../fixtures/household';

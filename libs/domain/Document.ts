@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { messages } from '../../app/messages';
+import { messages } from '../pages/messages';
 import { Schema } from './Schema';
 
 export const documentSchema = {

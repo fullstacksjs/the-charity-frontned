@@ -2,7 +2,6 @@ import { useCreateHouseholdMutation } from '@camp/data-layer';
 import { showNotification } from '@camp/design';
 import { createResolver, householdSchema } from '@camp/domain';
 import { messages } from '@camp/messages';
-import type { AppRoute } from '@camp/router';
 import { useNavigate } from '@camp/router';
 import { tid } from '@camp/test';
 import { isNull } from '@fullstacksjs/toolbox';
@@ -34,31 +33,30 @@ export const CreateHouseholdForm = ({ dismiss }: Props) => {
 
   const { nameInput, notification, submitBtn } = messages.households.createForm;
 
-  const onSubmit = handleSubmit(({ name }) => {
-    createDraftHousehold({ variables: { name } })
-      .then(({ data }) => {
-        const household = data.household;
-        if (isNull(household))
-          throw Error('Assert: household should not be null');
+  const onSubmit = handleSubmit(async ({ name }) => {
+    try {
+      const { data } = await createDraftHousehold({ variables: { name } });
+      const household = data.household;
+      if (isNull(household))
+        throw Error('Assert: household should not be null');
 
-        showNotification({
-          title: messages.households.create,
-          message: notification.success(household.name),
-          type: 'success',
-          ...tid(ids.notification.success),
-        });
+      showNotification({
+        title: messages.households.create,
+        message: notification.success(household.name),
+        type: 'success',
+        ...tid(ids.notification.success),
+      });
 
-        dismiss();
-        navigate({ to: `/dashboard/households/${household.id}` as AppRoute });
-      })
-      .catch(() =>
-        showNotification({
-          title: messages.households.create,
-          message: notification.failure(),
-          type: 'failure',
-          ...tid(ids.notification.failure),
-        }),
-      );
+      dismiss();
+      await navigate({ to: `/dashboard/households/${household.id}` });
+    } catch {
+      showNotification({
+        title: messages.households.create,
+        message: notification.failure(),
+        type: 'failure',
+        ...tid(ids.notification.failure),
+      });
+    }
   });
 
   return (

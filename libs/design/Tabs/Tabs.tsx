@@ -41,7 +41,7 @@ export const Tabs = ({ tabs }: Props) => {
       value={activeTab}
       onTabChange={value => {
         if (value == null) throw Error("Assert: tab value shouldn't be null");
-        setHash(value);
+        void setHash(value);
         setActiveTab(value);
       }}
     >

@@ -9,7 +9,7 @@ export interface NavLinkProps {
   icon: JSX.Element;
   to?: AppRoute;
   id: string;
-  onClick?: React.MouseEventHandler<HTMLElement>;
+  onClick?: React.MouseEventHandler<'a'>;
   variant?: 'destructive' | 'normal';
 }
 const destructiveMixin = (theme: MantineTheme) => ({
@@ -30,9 +30,7 @@ export const NavLink = ({
   variant,
   onClick,
 }: NavLinkProps) => {
-  const {
-    current: { pathname },
-  } = useLocation();
+  const { pathname } = useLocation();
 
   return (
     <MantineNavLink
@@ -45,7 +43,7 @@ export const NavLink = ({
         // NOTE: Seems to be a Mantine bug
         span: { fontSize: theme.fontSizes.md },
       })}
-      to={to!}
+      to={to}
       component={to ? Link : undefined}
       key={label}
       label={label}

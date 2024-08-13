@@ -55,7 +55,10 @@ const resolver = createResolver<FormSchema>({
 export const HouseholdDetail = () => {
   const t = messages.householdDetail;
   const tNotification = messages.notification.household;
-  const { id } = useParams();
+  const id = useParams({
+    from: '/dashboard/_layout/households/_layout/$householdId',
+    select: params => params.householdId,
+  });
   const navigate = useNavigate();
   const {
     handleSubmit,
@@ -135,7 +138,7 @@ export const HouseholdDetail = () => {
         message: tNotification.delete.success(household.name),
         type: 'success',
       });
-      navigate({ to: AppRoute.dashboard });
+      await navigate({ to: AppRoute.dashboard });
     } catch (err) {
       debug.error(err);
       showNotification({

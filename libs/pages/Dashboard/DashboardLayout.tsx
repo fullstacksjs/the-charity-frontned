@@ -1,12 +1,9 @@
-import { Outlet } from '@camp/router';
 import {
   AppShell as MantineAppShell,
   createStyles,
   MediaQuery,
   Stack,
 } from '@mantine/core';
-import { ModalsProvider } from '@mantine/modals';
-import { Notifications } from '@mantine/notifications';
 
 import { DashboardSidebar } from './DashboardSidebar';
 
@@ -23,26 +20,21 @@ const useStyles = createStyles(theme => ({
   },
 }));
 
-const outlet = <Outlet />;
-
-export const DashboardLayout = ({ children = outlet }) => {
+export const DashboardLayout = ({ children }: React.PropsWithChildren) => {
   const { classes } = useStyles();
 
   return (
-    <ModalsProvider>
-      <MantineAppShell
-        classNames={{ body: classes.body, main: classes.main }}
-        navbarOffsetBreakpoint="sm"
-        asideOffsetBreakpoint="sm"
-        navbar={
-          <MediaQuery smallerThan="sm" styles={{ display: 'none' }}>
-            <DashboardSidebar />
-          </MediaQuery>
-        }
-      >
-        <Stack sx={{ gap: '40px', minHeight: '100%' }}>{children}</Stack>
-        <Notifications limit={3} />
-      </MantineAppShell>
-    </ModalsProvider>
+    <MantineAppShell
+      classNames={{ body: classes.body, main: classes.main }}
+      navbarOffsetBreakpoint="sm"
+      asideOffsetBreakpoint="sm"
+      navbar={
+        <MediaQuery smallerThan="sm" styles={{ display: 'none' }}>
+          <DashboardSidebar />
+        </MediaQuery>
+      }
+    >
+      <Stack sx={{ gap: '40px', minHeight: '100%' }}>{children}</Stack>
+    </MantineAppShell>
   );
 };

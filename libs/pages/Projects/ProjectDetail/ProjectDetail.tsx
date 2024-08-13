@@ -16,7 +16,10 @@ import { ProjectDetailIds as ids } from './ProjectDetail.ids';
 
 export const ProjectDetail = () => {
   const t = messages.projectDetail;
-  const { id } = useParams();
+  const id = useParams({
+    from: '/dashboard/_layout/projects/_layout/$projectId',
+    select: params => params.projectId,
+  });
 
   const { data, loading, error } = useProjectQuery({
     variables: { id },

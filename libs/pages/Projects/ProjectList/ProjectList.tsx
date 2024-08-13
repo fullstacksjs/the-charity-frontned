@@ -10,7 +10,6 @@ import {
 } from '@camp/design';
 import { projectColumnHelper } from '@camp/domain';
 import { errorMessages, messages } from '@camp/messages';
-import { AppRoute } from '@camp/router';
 import { tid } from '@camp/test';
 import { isEmpty, isNull } from '@fullstacksjs/toolbox';
 import { Group } from '@mantine/core';
@@ -61,8 +60,8 @@ const columns = [
         <ProjectActionButton
           menuButtonId={ActionIds.projectTableMenuButtonId}
           menuId={ActionIds.projectTableMenuId}
-          to={AppRoute.projectDetail}
-          params={{ id: props.row.original.id }}
+          to="/dashboard/projects/$projectId"
+          params={{ projectId: props.row.original.id }}
         />
       </Group>
     ),

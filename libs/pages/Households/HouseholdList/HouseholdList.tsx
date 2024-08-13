@@ -3,7 +3,6 @@ import { useHouseholdListQuery } from '@camp/data-layer';
 import { DashboardCard, DashboardTitle, showNotification } from '@camp/design';
 import { householdColumnHelper } from '@camp/domain';
 import { errorMessages, messages } from '@camp/messages';
-import { AppRoute } from '@camp/router';
 import { InformationBadge, SeverityBadge } from '@camp/shared-components';
 import { tid } from '@camp/test';
 import { isEmpty } from '@fullstacksjs/toolbox';
@@ -44,8 +43,8 @@ const columns = [
       <Group position="apart">
         <SeverityBadge severity={props.getValue()} />
         <HouseholdActionButton
-          to={AppRoute.householdDetail}
-          params={{ id: props.row.original.id }}
+          to="/dashboard/households/$householdId"
+          params={{ householdId: props.row.original.id }}
           householdId={props.row.original.id}
           householdName={props.row.original.name}
           menuButtonId={actionIds.actionButton}

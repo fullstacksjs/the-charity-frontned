@@ -3,7 +3,6 @@ import { debug } from '@camp/debug';
 import { showNotification } from '@camp/design';
 import { createResolver, projectSchema } from '@camp/domain';
 import { messages } from '@camp/messages';
-import type { AppRoute } from '@camp/router';
 import { useNavigate } from '@camp/router';
 import { tid } from '@camp/test';
 import { isNull } from '@fullstacksjs/toolbox';
@@ -54,7 +53,7 @@ export const CreateProjectForm = ({ dismiss }: Props) => {
         ...tid(ids.notification.success),
       });
       dismiss();
-      navigate({ to: `/dashboard/projects/${project.id}` as AppRoute });
+      await navigate({ to: `/dashboard/projects/${project.id}` });
     } catch (err) {
       debug.error(err);
 

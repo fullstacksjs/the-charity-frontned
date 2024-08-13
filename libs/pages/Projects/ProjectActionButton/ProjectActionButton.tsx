@@ -1,13 +1,13 @@
 import { MenuIcon } from '@camp/icons';
 import { messages } from '@camp/messages';
-import type { AppRoute, PathParams } from '@camp/router';
 import { Link } from '@camp/router';
 import { tid } from '@camp/test';
 import { ActionIcon, Menu } from '@mantine/core';
+import type { LinkProps } from '@tanstack/react-router';
 
 interface Props {
-  to: AppRoute;
-  params?: PathParams<AppRoute>;
+  to: LinkProps['to'];
+  params?: LinkProps['params'];
   menuId?: string;
   menuButtonId?: string;
 }
@@ -26,6 +26,7 @@ export const ProjectActionButton = ({
         </ActionIcon>
       </Menu.Target>
       <Menu.Dropdown {...tid(menuId)}>
+        {/* @ts-expect-error poor type */}
         <Menu.Item to={to} params={params} component={Link}>
           {messages.actions.open}
         </Menu.Item>

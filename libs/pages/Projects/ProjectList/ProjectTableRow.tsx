@@ -1,5 +1,4 @@
 import type { ProjectKeys, ProjectListItem } from '@camp/domain';
-import type { AppRoute } from '@camp/router';
 import { useNavigate } from '@camp/router';
 import type { Table } from '@tanstack/react-table';
 import { flexRender } from '@tanstack/react-table';
@@ -12,7 +11,7 @@ export const ProjectTableRow = ({ rows }: Props) => {
   const navigate = useNavigate();
 
   const gotoDetail = (ProjectId: string) => {
-    navigate({ to: `/dashboard/projects/${ProjectId}` as AppRoute });
+    return navigate({ to: `/dashboard/projects/${ProjectId}` });
   };
 
   return rows?.getRowModel().rows.map(row => (
