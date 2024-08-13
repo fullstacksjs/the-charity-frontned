@@ -30,6 +30,7 @@ interface Options {
   https?: boolean;
 }
 
+// eslint-disable-next-line @typescript-eslint/naming-convention
 const __dirname = import.meta.dirname;
 
 export const config = ({ https = true }: Options = {}): UserConfig => ({
