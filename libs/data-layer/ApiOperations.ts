@@ -35,9 +35,9 @@ export type ApiProjectListItemFragment = { __typename?: 'project', name: string,
 
 export type ApiVisitKeysFragment = { __typename?: 'visit', id: string, household_id: string };
 
-export type ApiVisitDetailFragment = { __typename?: 'visit', name: string, visitor?: string | null, date: string, id: string, description?: string | null, status: SchemaTypes.VisitStatusEnum, documents: Array<{ __typename?: 'document', url: string, id: string, storage_id: string }> };
+export type ApiVisitDetailFragment = { __typename?: 'visit', name: string, visitor?: string | null, date: string, id: string, description?: string | null, status: SchemaTypes.VisitStatusEnum, visit_documents: Array<{ __typename?: 'visit_document', document: { __typename?: 'document', url: string, id: string, storage_id: string } }> };
 
-export type ApiVisitListItemFragment = { __typename?: 'visit', date: string, description?: string | null, documents: Array<{ __typename?: 'document', url: string, id: string, storage_id: string }> };
+export type ApiVisitListItemFragment = { __typename?: 'visit', date: string, description?: string | null, visit_documents: Array<{ __typename?: 'visit_document', document: { __typename?: 'document', url: string, id: string, storage_id: string } }> };
 
 export type ApiVisitNameFragment = { __typename?: 'visit', name: string };
 
@@ -69,9 +69,9 @@ export type ApiCreateVisitMutationVariables = SchemaTypes.Exact<{
 }>;
 
 
-export type ApiCreateVisitMutation = { __typename?: 'mutation_root', insert_visit_one?: { __typename?: 'visit', id: string, household_id: string, date: string, description?: string | null, documents: Array<{ __typename?: 'document', url: string, id: string, storage_id: string }> } | null };
+export type ApiCreateVisitMutation = { __typename?: 'mutation_root', insert_visit_one?: { __typename?: 'visit', id: string, household_id: string, date: string, description?: string | null, visit_documents: Array<{ __typename?: 'visit_document', document: { __typename?: 'document', url: string, id: string, storage_id: string } }> } | null };
 
-export type ApiNewVisitFragment = { __typename?: 'visit', id: string, household_id: string, date: string, description?: string | null, documents: Array<{ __typename?: 'document', url: string, id: string, storage_id: string }> };
+export type ApiNewVisitFragment = { __typename?: 'visit', id: string, household_id: string, date: string, description?: string | null, visit_documents: Array<{ __typename?: 'visit_document', document: { __typename?: 'document', url: string, id: string, storage_id: string } }> };
 
 export type ApiDeleteDocumentMutationVariables = SchemaTypes.Exact<{
   id: SchemaTypes.Scalars['uuid']['input'];
@@ -99,7 +99,7 @@ export type ApiDeleteVisitMutationVariables = SchemaTypes.Exact<{
 }>;
 
 
-export type ApiDeleteVisitMutation = { __typename?: 'mutation_root', delete_visit_by_pk?: { __typename?: 'visit', name: string, id: string, household_id: string, documents: Array<{ __typename?: 'document', url: string, id: string, storage_id: string }> } | null };
+export type ApiDeleteVisitMutation = { __typename?: 'mutation_root', delete_visit_by_pk?: { __typename?: 'visit', name: string, id: string, household_id: string, visit_documents: Array<{ __typename?: 'visit_document', document: { __typename?: 'document', url: string, id: string, storage_id: string } }> } | null };
 
 export type ApiEditHouseholdMutationVariables = SchemaTypes.Exact<{
   id: SchemaTypes.Scalars['uuid']['input'];
@@ -154,7 +154,7 @@ export type ApiVisitsQueryVariables = SchemaTypes.Exact<{
 }>;
 
 
-export type ApiVisitsQuery = { __typename?: 'query_root', visit: Array<{ __typename?: 'visit', id: string, household_id: string, date: string, description?: string | null, documents: Array<{ __typename?: 'document', url: string, id: string, storage_id: string }> }>, visit_aggregate: { __typename?: 'visit_aggregate', aggregate?: { __typename?: 'visit_aggregate_fields', count: number } | null } };
+export type ApiVisitsQuery = { __typename?: 'query_root', visit: Array<{ __typename?: 'visit', id: string, household_id: string, date: string, description?: string | null, visit_documents: Array<{ __typename?: 'visit_document', document: { __typename?: 'document', url: string, id: string, storage_id: string } }> }>, visit_aggregate: { __typename?: 'visit_aggregate', aggregate?: { __typename?: 'visit_aggregate_fields', count: number } | null } };
 
 export type ApiMemberListQueryVariables = SchemaTypes.Exact<{
   household_id: SchemaTypes.Scalars['uuid']['input'];
@@ -183,7 +183,7 @@ export type ApiVisitDetailQueryVariables = SchemaTypes.Exact<{
 }>;
 
 
-export type ApiVisitDetailQuery = { __typename?: 'query_root', visit_by_pk?: { __typename?: 'visit', id: string, household_id: string, name: string, visitor?: string | null, date: string, description?: string | null, status: SchemaTypes.VisitStatusEnum, documents: Array<{ __typename?: 'document', url: string, id: string, storage_id: string }> } | null };
+export type ApiVisitDetailQuery = { __typename?: 'query_root', visit_by_pk?: { __typename?: 'visit', id: string, household_id: string, name: string, visitor?: string | null, date: string, description?: string | null, status: SchemaTypes.VisitStatusEnum, visit_documents: Array<{ __typename?: 'visit_document', document: { __typename?: 'document', url: string, id: string, storage_id: string } }> } | null };
 
 export type ApiVisitNameQueryVariables = SchemaTypes.Exact<{
   household_id: SchemaTypes.Scalars['uuid']['input'];

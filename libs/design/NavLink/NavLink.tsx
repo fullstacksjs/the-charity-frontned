@@ -1,4 +1,4 @@
-import type { AppRoute } from '@camp/router';
+import type { LinkProps } from '@camp/router';
 import { Link, useLocation } from '@camp/router';
 import { tid } from '@camp/test';
 import type { MantineTheme } from '@mantine/core';
@@ -7,9 +7,9 @@ import { NavLink as MantineNavLink } from '@mantine/core';
 export interface NavLinkProps {
   label: string;
   icon: JSX.Element;
-  to?: AppRoute;
+  to?: LinkProps['to'];
   id: string;
-  onClick?: React.MouseEventHandler<HTMLElement>;
+  onClick?: React.MouseEventHandler<'a'>;
   variant?: 'destructive' | 'normal';
 }
 const destructiveMixin = (theme: MantineTheme) => ({
@@ -30,9 +30,7 @@ export const NavLink = ({
   variant,
   onClick,
 }: NavLinkProps) => {
-  const {
-    current: { pathname },
-  } = useLocation();
+  const { pathname } = useLocation();
 
   return (
     <MantineNavLink
@@ -46,7 +44,6 @@ export const NavLink = ({
         span: { fontSize: theme.fontSizes.md },
       })}
       to={to}
-      // @ts-expect-error polymorphic behavior
       component={to ? Link : undefined}
       key={label}
       label={label}

@@ -1,14 +1,14 @@
-import { createHouseholdButtonId } from '../../app/Dashboard/Households/_components/CreateHousehold/CreateHouseholdButton/CreateHouseholdButton.ids';
-import { createHouseholdFormIds } from '../../app/Dashboard/Households/_components/CreateHousehold/CreateHouseholdForm/CreateHouseholdForm.ids';
 import { dashboardHeaderId } from '../../libs/design/DashboardHeader/DashboardHeader.ids';
-import { AppRoute } from '../../libs/router/AppRoutes';
+import { createHouseholdButtonId } from '../../libs/pages/Households/CreateHousehold/CreateHouseholdButton/CreateHouseholdButton.ids';
+import { createHouseholdFormIds } from '../../libs/pages/Households/CreateHousehold/CreateHouseholdForm/CreateHouseholdForm.ids';
 import { admin } from '../fixtures/admin';
 import { householdFixture } from '../fixtures/household';
+import { Routes } from '../support/routes';
 
 describe('Create Household', () => {
   beforeEach(() => {
     cy.login(admin);
-    cy.visit(AppRoute.households);
+    cy.visit(Routes.Households);
   });
 
   it('[OK]: Create a household', () => {

@@ -19,8 +19,10 @@
       "@camp/hooks": ["./app/hooks/index.ts"],
       "@camp/icons": ["./libs/icons/index.ts"],
       "@camp/infra": ["./libs/infra/index.ts"],
-      "@camp/messages": ["./app/messages.ts"],
+      "@camp/messages": ["./libs/pages/messages.ts"],
+      "@camp/pages/*": ["./libs/pages/*"],
       "@camp/router": ["./libs/router/index.ts"],
+      "@camp/shared-components": ["./libs/shared-components/index.ts"],
       "@camp/test": ["./libs/test/index.ts"],
       "@camp/zod-addons": ["./libs/zod-addons/index.ts"],
       "@camp/zod-addons/monkey-patch": ["./libs/zod-addons/monkeyPatchZod.ts"]

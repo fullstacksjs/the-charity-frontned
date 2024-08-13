@@ -1,15 +1,15 @@
-import { dashboardSidebarIds } from '../../app/Dashboard/_components/DashboardSidebar/DashboardSidebar.ids';
-import { createProjectButtonId } from '../../app/Dashboard/Projects/CreateProject/CreateProjectButton/CreateProjectButton.ids';
-import { createProjectFormIds } from '../../app/Dashboard/Projects/CreateProject/CreateProjectForm/CreateProjectForm.ids';
 import { dashboardHeaderId } from '../../libs/design/DashboardHeader/DashboardHeader.ids';
-import { AppRoute } from '../../libs/router/AppRoutes';
+import { dashboardSidebarIds } from '../../libs/pages/Dashboard/DashboardSidebar/DashboardSidebar.ids';
+import { createProjectButtonId } from '../../libs/pages/Projects/CreateProject/CreateProjectButton/CreateProjectButton.ids';
+import { createProjectFormIds } from '../../libs/pages/Projects/CreateProject/CreateProjectForm/CreateProjectForm.ids';
 import { admin } from '../fixtures/admin';
 import { projectFixture } from '../fixtures/project';
+import { Routes } from '../support/routes';
 
 describe('Create Project', () => {
   beforeEach(() => {
     cy.login(admin);
-    cy.visit(AppRoute.projects);
+    cy.visit(Routes.Projects);
     cy.findByTestId(dashboardSidebarIds.projects).click();
     cy.findByTestId(dashboardHeaderId)
       .findByTestId(createProjectButtonId)

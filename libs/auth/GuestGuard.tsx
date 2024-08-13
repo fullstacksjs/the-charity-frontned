@@ -1,17 +1,18 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import { debug, DebugScopes } from '@camp/debug';
-import { AppRoute, Navigate, Outlet } from '@camp/router';
+import { Navigate, Outlet } from '@camp/router';
+import type { LinkProps } from '@tanstack/react-router';
 
 interface Props {
   children?: JSX.Element;
-  to?: AppRoute;
+  to?: LinkProps['to'];
 }
 
 const defaultChildren = <Outlet />;
 
 export const GuestGuard = ({
   children = defaultChildren,
-  to = AppRoute.dashboard,
+  to = '/dashboard',
 }: Props) => {
   const { isAuthenticated } = useAuth0();
   debug.log(DebugScopes.Auth, { isAuthenticated });

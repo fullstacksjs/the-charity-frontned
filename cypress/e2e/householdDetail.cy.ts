@@ -1,10 +1,13 @@
-import { householdDetailIds } from '../../app/Dashboard/Households/HouseholdDetail/HouseholdDetail.ids';
-import type { Household } from '../../libs/domain';
-import { HouseholdSeverityEnum } from '../../libs/domain';
-import { AppRoute } from '../../libs/router/AppRoutes';
+import { householdDetailIds } from '../../libs/pages/Households/HouseholdDetail/HouseholdDetail.ids';
 import { admin } from '../fixtures/admin';
 import { householdFixture } from '../fixtures/household';
+import { Routes } from '../support/routes';
 import * as API from './api';
+
+interface Household {
+  id: string;
+  name: string;
+}
 
 describe('Household', () => {
   beforeEach(() => {
@@ -14,9 +17,9 @@ describe('Household', () => {
   it('[OK]: Admin wants to see created household information', () => {
     const name = householdFixture.name();
     cy.wrap<Promise<Household>, Household>(
-      API.createHousehold(name, HouseholdSeverityEnum.Critical),
+      API.createHousehold(name, 'Critical'),
     ).then(household => {
-      cy.visit(AppRoute.householdDetail, { params: { id: household.id } });
+      cy.visit(Routes.HouseholdDetail, { params: { id: household.id } });
       cy.findByTestId(householdDetailIds.nameField)
         .find('input')
         .should('have.value', household.name);
@@ -33,9 +36,9 @@ describe('Household', () => {
 
     const h2Name = householdFixture.name();
     cy.wrap<Promise<Household>, Household>(
-      API.createHousehold(h2Name, HouseholdSeverityEnum.Normal),
+      API.createHousehold(h2Name, 'Normal'),
     ).then(household => {
-      cy.visit(AppRoute.householdDetail, { params: { id: household.id } });
+      cy.visit(Routes.HouseholdDetail, { params: { id: household.id } });
       cy.findByTestId(householdDetailIds.nameField)
         .find('input')
         .should('have.value', household.name);

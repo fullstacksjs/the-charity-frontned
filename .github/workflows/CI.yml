@@ -16,28 +16,24 @@ jobs:
     timeout-minutes: 10
 
     steps:
-      - uses: actions/checkout@v3
-
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
+      - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v3
         with:
-          node-version-file: 'package.json'
-          cache: 'pnpm'
+          node-version: 20
+          cache: 'npm'
 
       - name: Install dependencies
-        run: pnpm install
+        run: npm install
 
       - name: Lint and Format
-        run: pnpm run lint:ci
+        run: npm run lint:ci
 
       - name: Build
-        run: pnpm run build
+        run: npm run build
 
       - name: Test
-        run: pnpm run test:unit
+        run: npm run test:unit
 
   chromatic:
     runs-on: ubuntu-latest
@@ -55,23 +51,16 @@ jobs:
       APP_HASURA_ADMIN_SECRET: ${{ secrets.APP_HASURA_ADMIN_SECRET }}
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
-          # NOTE: required because https://www.chromatic.com/docs/github-actions#support-for-codeactionscheckoutv2code-and-above
           fetch-depth: 0
-
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
 
       - uses: actions/setup-node@v3
         with:
-          node-version-file: 'package.json'
-          cache: 'pnpm'
+          node-version: 20
+          cache: 'npm'
 
-      - name: Install dependencies
-        run: pnpm install
+      - run: npm install
 
       - name: Deploy Chromatic
         uses: chromaui/action@v1
@@ -95,29 +84,31 @@ jobs:
       NODE_TLS_REJECT_UNAUTHORIZED: 0
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v2
+      - uses: actions/setup-node@v3
         with:
-          version: 8
+          node-version: 20
+          cache: 'npm'
 
       - name: Run E2E tests
-        uses: cypress-io/github-action@v4
+        uses: cypress-io/github-action@v6
+        env:
+          PORT: 5173
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CYPRESS_RECORD_VIDEO: true
+
         with:
-          start: pnpm exec vite --port ${{ env.PORT }} --host 127.0.0.1
-          build: pnpm run build
-          wait-on: https://127.0.0.1:${{ env.PORT }}
+          start: npx vite --host 127.0.0.1
+          wait-on: https://127.0.0.1:5173
           wait-on-timeout: 20
           browser: chrome
-
-        env:
-          PORT: 3002
-          CYPRESS_RECORD_KEY: ${{ vars.CYPRESS_RECORD_KEY }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          record: true
 
       - name: Run Component tests
-        uses: cypress-io/github-action@v4
+        uses: cypress-io/github-action@v6
         with:
           install: false
           component: true

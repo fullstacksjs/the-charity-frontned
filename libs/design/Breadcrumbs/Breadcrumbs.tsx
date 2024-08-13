@@ -1,5 +1,4 @@
 import { ChevronLeftIcon, HomeIcon } from '@camp/icons';
-import type { AppRoute } from '@camp/router';
 import { Link } from '@camp/router';
 import type { Styles } from '@mantine/core';
 import {
@@ -39,11 +38,7 @@ export const Breadcrumbs = ({ items }: Props) => {
     >
       <HomeIcon color={theme.colors.fg[4]} width="24" height="24" />
       {items.map(item => (
-        <Anchor
-          key={item.name + item.path}
-          to={item.path as AppRoute}
-          component={Link}
-        >
+        <Anchor key={item.name + item.path} to={item.path} component={Link}>
           {item.name}
         </Anchor>
       ))}

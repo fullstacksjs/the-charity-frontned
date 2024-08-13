@@ -36,6 +36,9 @@ export const theme: MantineThemeOverride = {
       backgroundColor: palette.secondary.default,
       borderRadius: '4px',
     },
+    'vite-plugin-checker-error-overlay': {
+      direction: 'ltr',
+    },
   }),
   dir: 'rtl',
   fontFamily: 'IRANSansFaNum, IRANSans',

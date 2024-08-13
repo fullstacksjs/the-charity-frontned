@@ -19,10 +19,12 @@ const Document = gql`
     delete_visit_by_pk(id: $id) {
       ...VisitKeys
       name
-      documents {
-        url
-        id
-        storage_id
+      visit_documents {
+        document {
+          url
+          id
+          storage_id
+        }
       }
     }
   }
@@ -64,8 +66,8 @@ export const useDeleteVisitMutation = (
     toClient,
     toApiVariables,
     onCompleted: (data, ctx) => {
-      Prray.from(data?.delete_visit_by_pk?.documents ?? [])
-        .forEachAsync(d => fileStorageClient.unUpload(d.storage_id))
+      Prray.from(data?.delete_visit_by_pk?.visit_documents ?? [])
+        .forEachAsync(d => fileStorageClient.unUpload(d.document.storage_id))
         .catch(e => debug.error(DebugScopes.All, e))
         .finally(() => options?.onCompleted?.(data, ctx));
     },

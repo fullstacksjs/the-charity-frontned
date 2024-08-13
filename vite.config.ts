@@ -1,6 +1,9 @@
 /// <reference types="vitest" />
+import path from 'node:path';
+
 import { Config } from '@fullstacksjs/config';
 import { compact } from '@fullstacksjs/toolbox';
+import { TanStackRouterVite } from '@tanstack/router-plugin/vite';
 import basicSsl from '@vitejs/plugin-basic-ssl';
 import react from '@vitejs/plugin-react';
 import type { UserConfig } from 'vite';
@@ -26,12 +29,20 @@ const envs = new Config({
 interface Options {
   https?: boolean;
 }
+
+// eslint-disable-next-line @typescript-eslint/naming-convention
+const __dirname = import.meta.dirname;
+
 export const config = ({ https = true }: Options = {}): UserConfig => ({
   plugins: compact([
     https ? basicSsl() : undefined,
     checker({ typescript: true }),
     tsconfigPaths(),
     cypressAliases(),
+    TanStackRouterVite({
+      routesDirectory: path.join(__dirname, 'app/routes'),
+      generatedRouteTree: path.join(__dirname, 'app/routeTree.gen.ts'),
+    }),
     react({ exclude: /\.stories\.(t|j)sx?$/ }),
     svgr(),
   ]),

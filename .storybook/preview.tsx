@@ -2,17 +2,17 @@ import { MockedProvider } from '@apollo/client/testing';
 import { Notifications } from '@mantine/notifications';
 import { Decorator, Parameters, Preview } from '@storybook/react';
 import {
-  ReactLocation,
-  Router,
+  RouterProvider,
   createMemoryHistory,
-} from '@tanstack/react-location';
+  createRootRoute,
+  createRouter,
+} from '@tanstack/react-router';
 import 'dayjs/locale/fa';
 import React from 'react';
 import { ThemeProvider } from '../libs/design';
 import '../libs/zod-addons/monkeyPatchZod';
 
 const parameters: Parameters = {
-  actions: { argTypesRegex: '^on[A-Z].*' },
   controls: {
     expanded: true,
     matchers: {
@@ -26,22 +26,27 @@ const parameters: Parameters = {
 const decorators: Decorator[] = [
   (Story, { args }) => {
     const router = args.router as any;
-    const { layout, ...routes } = args.router ?? ({} as any);
-    const Layout = layout ?? React.Fragment;
-    const location = new ReactLocation({
-      history: createMemoryHistory({ initialEntries: [router?.route ?? '/'] }),
-    });
-
-    return router ? (
-      <Router routes={[routes]} location={location}>
-        <Layout>
-          <Story />
-        </Layout>
-      </Router>
-    ) : (
-      <Router routes={[]} location={location}>
-        <Story />
-      </Router>
+    const Layout = router?.layout ?? React.Fragment;
+    return (
+      <RouterProvider
+        router={createRouter({
+          context: {
+            getTitle: () => router.context?.getTitle() ?? '',
+          },
+          history: createMemoryHistory({
+            initialEntries: [router?.route ?? '/'],
+          }),
+          routeTree: createRootRoute({
+            component: () => (
+              <Layout>
+                <Story />
+              </Layout>
+            ),
+            errorComponent: () => <Story />,
+          }),
+        })}
+        defaultComponent={() => <Story />}
+      ></RouterProvider>
     );
   },
   Story => (

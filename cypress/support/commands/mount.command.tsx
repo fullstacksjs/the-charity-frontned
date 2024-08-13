@@ -5,7 +5,12 @@ import {
   InMemoryCache,
 } from '@apollo/client';
 import { ModalsProvider } from '@mantine/modals';
-import { ReactLocation, Router } from '@tanstack/react-location';
+import {
+  createMemoryHistory,
+  createRootRoute,
+  createRouter,
+  RouterProvider,
+} from '@tanstack/react-router';
 import { mount } from 'cypress/react18';
 
 import { ThemeProvider } from '../../../libs/design';
@@ -23,9 +28,14 @@ Cypress.Commands.add(
         }
       >
         <ThemeProvider>
-          <Router location={new ReactLocation()} routes={[]}>
-            <ModalsProvider>{element}</ModalsProvider>
-          </Router>
+          <RouterProvider
+            router={createRouter({
+              routeTree: createRootRoute({
+                component: () => <ModalsProvider>{element}</ModalsProvider>,
+              }),
+              history: createMemoryHistory({ initialEntries: ['/'] }),
+            })}
+          />
         </ThemeProvider>
       </ApolloProvider>,
       ...rest,

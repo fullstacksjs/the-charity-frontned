@@ -1,7 +1,7 @@
-import { householdActionIds } from '../../app/Dashboard/Households/_components/HouseholdActionButton/HouseholdActionButton.ids';
-import { AppRoute } from '../../libs/router/AppRoutes';
+import { householdActionIds } from '../../libs/pages/Households/HouseholdActionButton/HouseholdActionButton.ids';
 import { admin } from '../fixtures/admin';
 import { householdFixture } from '../fixtures/household';
+import { Routes } from '../support/routes';
 import * as api from './api';
 
 describe('Delete a Household', () => {
@@ -12,7 +12,7 @@ describe('Delete a Household', () => {
   it('should show the success message after deleting', () => {
     const name = householdFixture.name();
     cy.wrap(api.createHousehold(name)).then(() => {
-      cy.visit(AppRoute.households);
+      cy.visit(Routes.Households);
       cy.findByText(name)
         .parents('tr')
         .findByTestId(householdActionIds.actionButton)
@@ -28,13 +28,13 @@ describe('Delete a Household', () => {
   it('should navigate to the household list after deleting household from the household detail page', () => {
     const name = householdFixture.name();
     cy.wrap(api.createHousehold(name)).then(({ id }: { id: string }) => {
-      cy.visit(AppRoute.householdDetail, { params: { id } });
+      cy.visit(Routes.HouseholdDetail, { params: { id } });
       cy.findByRole('button', { name: /حذف کردن/ }).click();
       cy.findByRole('dialog').within(() => {
         cy.findByRole('button', { name: /حذف/ }).click();
       });
       cy.findNotification('success').should('exist');
-      cy.location('pathname').should('equal', AppRoute.households);
+      cy.location('pathname').should('equal', Routes.Households);
     });
   });
 });

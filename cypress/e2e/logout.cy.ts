@@ -1,12 +1,12 @@
-import { exitNavLinkId } from '../../app/Dashboard/_components/ExitNavLink/ExitNavLink.ids';
-import { logoutModalIds } from '../../app/Dashboard/_components/LogoutModal/LogoutModal.ids';
-import { AppRoute } from '../../libs/router/AppRoutes';
+import { exitNavLinkId } from '../../libs/pages/Dashboard/ExitNavLink/ExitNavLink.ids';
+import { logoutModalIds } from '../../libs/pages/Dashboard/LogoutModal/LogoutModal.ids';
 import { admin } from '../fixtures/admin';
+import { Routes } from '../support/routes';
 
 describe('logout', () => {
   beforeEach(() => {
     cy.login(admin);
-    cy.visit(AppRoute.dashboard);
+    cy.visit(Routes.Dashboard);
     cy.findByTestId(exitNavLinkId).click();
   });
 
@@ -16,6 +16,6 @@ describe('logout', () => {
 
   it('should navigate to the login page after confirm', () => {
     cy.findByTestId(logoutModalIds.acceptBtn).click();
-    cy.location('pathname').should('eq', AppRoute.login);
+    cy.location('pathname').should('eq', Routes.Login);
   });
 });
