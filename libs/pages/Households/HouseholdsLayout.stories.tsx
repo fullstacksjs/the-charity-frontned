@@ -10,8 +10,8 @@ export default {
     router: {
       route: '/dashboard/households',
       layout: DashboardLayout,
-      meta: {
-        breadcrumb: messages.households.title,
+      context: {
+        getTitle: () => messages.households.title,
       },
     },
   },

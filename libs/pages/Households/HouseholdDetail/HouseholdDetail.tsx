@@ -24,7 +24,7 @@ import {
 } from '@camp/domain';
 import { ArrowUpIcon, CheckIcon, EditIcon, TrashIcon } from '@camp/icons';
 import { errorMessages, messages } from '@camp/messages';
-import { AppRoute, useNavigate, useParams } from '@camp/router';
+import { AppRoute, useNavigate } from '@camp/router';
 import { InformationBadge, SeverityBadge } from '@camp/shared-components';
 import { tid } from '@camp/test';
 import { isNull } from '@fullstacksjs/toolbox';
@@ -52,13 +52,10 @@ const resolver = createResolver<FormSchema>({
 });
 
 // eslint-disable-next-line max-lines-per-function
-export const HouseholdDetail = () => {
+export const HouseholdDetail = ({ id }: { id: string }) => {
   const t = messages.householdDetail;
   const tNotification = messages.notification.household;
-  const id = useParams({
-    from: '/dashboard/_layout/households/_layout/$householdId',
-    select: params => params.householdId,
-  });
+
   const navigate = useNavigate();
   const {
     handleSubmit,

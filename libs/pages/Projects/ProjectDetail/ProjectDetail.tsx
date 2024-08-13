@@ -6,20 +6,15 @@ import {
   Tabs,
 } from '@camp/design';
 import { errorMessages, messages } from '@camp/messages';
-import { useParams } from '@camp/router';
 import { isEmpty, isNull } from '@fullstacksjs/toolbox';
 import { Text, Title } from '@mantine/core';
 
 import { ProjectStatusBadge } from '../ProjectStatusBadge';
-import { ProjectDocuments } from './_components/ProjectDocuments';
 import { ProjectDetailIds as ids } from './ProjectDetail.ids';
+import { ProjectDocuments } from './ProjectDocuments';
 
-export const ProjectDetail = () => {
+export const ProjectDetail = ({ id }: { id: string }) => {
   const t = messages.projectDetail;
-  const id = useParams({
-    from: '/dashboard/_layout/projects/_layout/$projectId',
-    select: params => params.projectId,
-  });
 
   const { data, loading, error } = useProjectQuery({
     variables: { id },
